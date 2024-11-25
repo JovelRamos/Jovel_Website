@@ -1,10 +1,15 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useTheme } from './ThemeContext';
 import './NavigationMenu.css';
 
 const NavigationMenu = () => {
-  const { darkMode, toggleTheme } = useTheme();
+  const { darkMode, toggleTheme, updateAccentForPath } = useTheme();
+  const location = useLocation();
+
+  useEffect(() => {
+    updateAccentForPath(location.pathname);
+  }, [location.pathname, updateAccentForPath]);
 
   return (
     <nav className={`nav-menu ${darkMode ? 'dark' : 'light'}`}>
@@ -34,12 +39,8 @@ const NavigationMenu = () => {
           Contact
         </NavLink>
       </div>
-      <button 
-        className="theme-toggle" 
-        onClick={toggleTheme}
-        aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-      >
-        {darkMode ? '☀️' : '🌙'}
+      <button className="theme-toggle" onClick={toggleTheme}>
+        {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
       </button>
     </nav>
   );

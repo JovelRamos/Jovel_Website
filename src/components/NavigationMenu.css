@@ -4,15 +4,13 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Light mode is default */
 body {
   background-color: #f9f9f9;
   color: #333;
 }
 
-/* Dark mode styles with higher contrast */
 body.dark-mode {
-  background-color: #121212; /* Darker background */
+  background-color: #121212; 
   color: #ffffff;
 }
 
@@ -42,17 +40,16 @@ body.dark-mode {
   position: relative;
 }
 
-/* Red accent color for light mode hover */
+
 body:not(.dark-mode) .nav-item:hover {
-  color: #e63946; /* Bright but not harsh red */
+  color: #e63946; 
 }
 
-/* Slightly lighter red for dark mode hover for better visibility */
+
 body.dark-mode .nav-item:hover {
-  color: #ff4d5e; /* Lighter, more vibrant red for dark mode */
+  color: #ff4d5e; 
 }
 
-/* Active state underline styling */
 .nav-item.active {
   font-weight: bold;
 }
@@ -64,14 +61,14 @@ body.dark-mode .nav-item:hover {
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #e63946; /* Red underline in light mode */
+  background-color: #e63946; 
 }
 
 body.dark-mode .nav-item.active::after {
-  background-color: #ff4d5e; /* Lighter red underline in dark mode */
+  background-color: #ff4d5e; 
 }
 
-/* Theme toggle button styles */
+
 .theme-toggle {
   padding: 0.5rem 1rem;
   cursor: pointer;
@@ -80,7 +77,6 @@ body.dark-mode .nav-item.active::after {
   transition: all 0.3s ease;
 }
 
-/* Light mode button (default) */
 body:not(.dark-mode) .theme-toggle {
   background-color: #ffffff;
   color: #333333;
@@ -92,7 +88,6 @@ body:not(.dark-mode) .theme-toggle:hover {
   color: #ffffff;
 }
 
-/* Dark mode button with higher contrast */
 body.dark-mode .theme-toggle {
   background-color: #121212;
   color: #ffffff;
@@ -104,7 +99,6 @@ body.dark-mode .theme-toggle:hover {
   color: #121212;
 }
 
-/* Add styles for main content areas */
 main {
   padding: 2rem;
   transition: background-color 0.3s, color 0.3s;
@@ -114,7 +108,6 @@ body.dark-mode main {
   background-color: #121212;
 }
 
-/* Additional contrast styles for dark mode content */
 body.dark-mode h1,
 body.dark-mode h2,
 body.dark-mode h3 {
