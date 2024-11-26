@@ -1,0 +1,144 @@
+.about-container {
+    min-height: 100vh;
+    padding: 4rem 2rem;
+  }
+  
+  .about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .about-title {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+  
+  .accent-text {
+    color: var(--accent-color);  /* Will stay the same in both modes */
+  }
+  
+  .profile-section {
+    display: flex;
+    gap: 4rem;
+    align-items: flex-start;
+  }
+  
+  .profile-image-container {
+    flex: 0 0 300px;
+  }
+  
+  .profile-image-placeholder {
+    width: 300px;
+    height: 300px;
+    background-color: var(--background-secondary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+  }
+  
+  .profile-details {
+    flex: 1;
+  }
+  
+  .section-title {
+    color: var(--accent-color) !important; 
+    font-size: 1.8rem;
+    margin: 2rem 0 1rem;
+  }
+  
+  .section-title:first-child {
+    margin-top: 0;
+  }
+  
+  .profile-details p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+  
+  .skills-section {
+    margin-top: 3rem;
+  }
+  
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 80px);
+    gap: 2rem;
+    margin-top: 1.5rem;
+    justify-content: center;
+  }
+  
+  .skill-item {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .skill-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--background-secondary);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+  
+  .skill-icon {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+  }
+  
+  .skill-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .skill-item:hover .skill-background {
+    border-color: var(--skill-color);  /* Using the individual skill colors */
+    box-shadow: 0 0 20px var(--skill-color);  /* Using the individual skill colors */
+  }
+  
+  .skill-item:hover .skill-icon {
+    transform: scale(1.1);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .profile-section {
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+  
+    .profile-image-container {
+      flex: none;
+    }
+  
+    .profile-details {
+      text-align: center;
+    }
+  
+    .skills-grid {
+      grid-template-columns: repeat(3, 80px);
+      gap: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .skills-grid {
+      grid-template-columns: repeat(2, 80px);
+      gap: 1rem;
+    }
+  }

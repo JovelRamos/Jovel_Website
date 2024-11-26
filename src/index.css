@@ -1,5 +1,6 @@
 :root {
   --background-color: #f9f9f9;
+  --background-secondary: #ffefef;  
   --text-color: #333333;
   --text-secondary: #666666;
   --accent-color: #e63946;
@@ -12,6 +13,13 @@ body {
   background-color: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+  --background-color: #121212;
+  --background-secondary: #2e2e2e;  
+  --text-color: #ffffff;
+  --text-secondary: #e1e1e1;
 }
 
 .nav-menu {
