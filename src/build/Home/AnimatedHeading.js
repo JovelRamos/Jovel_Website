@@ -14,7 +14,7 @@ const AnimatedHeading = () => {
   };
 
   const letterVariants = {
-    hidden: { 
+    hidden: {
       y: 50,
       opacity: 0,
       scale: 0.5
@@ -35,7 +35,7 @@ const AnimatedHeading = () => {
   const name = "Jovel";
 
   return (
-    <motion.h1 
+    <motion.h1
       className="main-heading"
       variants={containerVariants}
       initial="hidden"
@@ -50,15 +50,17 @@ const AnimatedHeading = () => {
           {char === ' ' ? '\u00A0' : char}
         </motion.span>
       ))}
-      {name.split('').map((char, index) => (
-        <motion.span
-          key={`name-${index}`}
-          variants={letterVariants}
-          className="inline-block accent-text"
-        >
-          {char}
-        </motion.span>
-      ))}
+      <span className="name-wrapper">
+        {name.split('').map((char, index) => (
+          <motion.span
+            key={`name-${index}`}
+            variants={letterVariants}
+            className="inline-block accent-text"
+          >
+            {char}
+          </motion.span>
+        ))}
+      </span>
     </motion.h1>
   );
 };

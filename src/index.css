@@ -5,6 +5,15 @@
   --text-secondary: #666666;
   --accent-color: #e63946;
   --accent-hover: #c4323f;
+  --text-shadow-bold: 
+  0 1px 0 #555,
+  0 2px 0 #444,
+  0 3px 0 #333,
+  0 4px 0 #222,
+  0 5px 0 #111,
+  0 6px 0 #000,
+  0 7px 0 rgba(0, 0, 0, 0.9),
+  0 8px 7px rgba(0, 0, 0, 0.4);
 }
 
 body {
@@ -20,6 +29,15 @@ body.dark-mode {
   --background-secondary: #2e2e2e;  
   --text-color: #ffffff;
   --text-secondary: #e1e1e1;
+  --text-shadow-bold: 
+  0 1px 0 #000,
+  0 2px 0 #111,
+  0 3px 0 #222,
+  0 4px 0 #333,
+  0 5px 0 #444,
+  0 6px 0 #555,
+  0 7px 0 #666,
+  0 8px 4px #777;
 }
 
 .nav-menu {

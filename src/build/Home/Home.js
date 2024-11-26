@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import portraitImage from '../../assets/portrait.png';
 import AnimatedHeading from './AnimatedHeading';
 import './Home.css';
