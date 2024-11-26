@@ -41,13 +41,10 @@ body.dark-mode {
 }
 
 
-body:not(.dark-mode) .nav-item:hover {
-  color: #e63946; 
-}
 
 
 body.dark-mode .nav-item:hover {
-  color: #ff4d5e; 
+  color: var(--accent-color); 
 }
 
 .nav-item.active {
@@ -61,11 +58,11 @@ body.dark-mode .nav-item:hover {
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #e63946; 
+  background-color: var(--accent-color); 
 }
 
 body.dark-mode .nav-item.active::after {
-  background-color: #ff4d5e; 
+  background-color: var(--accent-color); 
 }
 
 

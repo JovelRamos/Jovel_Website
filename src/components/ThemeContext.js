@@ -3,10 +3,10 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 const ThemeContext = createContext();
 
 const pageAccents = {
-  '/': '#e63946',        // Home page accent
-  '/about-me': '#FFD429', // About Me page accent
-  '/portfolio': '#7757FF', // Portfolio page accent
-  '/contact': '##FF3E0F'   // Contact page accent
+    '/': '#e63946',        // Home page accent
+    '/about-me': '#FFD429', // About Me page accent
+    '/portfolio': '#7757FF', // Portfolio page accent
+    '/contact': '##FF3E0F'   // Contact page accent
 };
 
 export const ThemeProvider = ({ children }) => {
@@ -15,11 +15,7 @@ export const ThemeProvider = ({ children }) => {
     return savedTheme ? JSON.parse(savedTheme) : false;
   });
   
-  const [currentPath, setCurrentPath] = useState('/');
-  
-  const getCurrentAccent = useCallback(() => {
-    return pageAccents[currentPath] || pageAccents['/'];
-  }, [currentPath]);
+  const [accentColor, setAccentColor] = useState(pageAccents['/']);
 
   const adjustColor = (color, amount) => {
     const clamp = (num) => Math.min(Math.max(num, 0), 255);
@@ -38,42 +34,45 @@ export const ThemeProvider = ({ children }) => {
     ).toString(16).slice(1)}`;
   };
 
+  // Update accent color based on path
+  const updateAccentForPath = useCallback((path) => {
+    const newAccent = pageAccents[path] || pageAccents['/'];
+    setAccentColor(newAccent);
+  }, []);
+
+  // Update CSS variables whenever theme or accent changes
   useEffect(() => {
     const root = document.documentElement;
-    const accent = getCurrentAccent();
-
+    
+    // Set theme colors
     if (darkMode) {
       root.style.setProperty('--background-color', '#121212');
       root.style.setProperty('--text-color', '#ffffff');
       root.style.setProperty('--text-secondary', '#e1e1e1');
-      root.style.setProperty('--accent-color', accent);
-      root.style.setProperty('--accent-hover', adjustColor(accent, 20));
       document.body.className = 'dark-mode';
     } else {
       root.style.setProperty('--background-color', '#f9f9f9');
       root.style.setProperty('--text-color', '#333333');
       root.style.setProperty('--text-secondary', '#666666');
-      root.style.setProperty('--accent-color', accent);
-      root.style.setProperty('--accent-hover', adjustColor(accent, -20));
       document.body.className = 'light-mode';
     }
 
+    // Set accent colors
+    root.style.setProperty('--accent-color', accentColor);
+    root.style.setProperty('--accent-hover', adjustColor(accentColor, darkMode ? 20 : -20));
+    
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
-  }, [darkMode, getCurrentAccent]);
+  }, [darkMode, accentColor]);
 
   const toggleTheme = () => {
     setDarkMode(!darkMode);
   };
 
-  const updateAccentForPath = (path) => {
-    setCurrentPath(path);
-  };
-
   return (
-    <ThemeContext.Provider value={{ 
-      darkMode, 
+    <ThemeContext.Provider value={{
+      darkMode,
       toggleTheme,
-      currentAccent: getCurrentAccent(),
+      accentColor,
       updateAccentForPath
     }}>
       {children}

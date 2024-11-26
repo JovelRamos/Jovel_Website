@@ -69,3 +69,7 @@ body {
   background-color: var(--text-color);
   color: var(--background-color);
 }
+
+.animated-line {
+  background-color: var(--accent-color);
+}
