@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import portraitImage from '../../assets/portrait.png';
+import AnimatedHeading from './AnimatedHeading';
 import './Home.css';
 
 const Home = () => {
@@ -7,9 +8,7 @@ const Home = () => {
     <div className="home-container">
       <div className="content-wrapper">
         <div className="text-section">
-          <h1 className="main-heading">
-            I am <span className="accent-text">Jovel</span>
-          </h1>
+          <AnimatedHeading />
           
           <div className="animated-line" />
           

@@ -1,4 +1,5 @@
 import React from 'react';
+import portraitImage from '../../assets/aboutme_portrait.png';
 import './AboutMe.css';
 
 const AboutMe = () => {
@@ -45,7 +46,11 @@ const AboutMe = () => {
         <div className="profile-section">
           <div className="profile-image-container">
             <div className="profile-image-placeholder">
-              Profile Image
+                <img 
+                src={portraitImage} 
+                alt="Jovel's Portrait" 
+                className="portrait-image"
+              />
             </div>
           </div>
           
@@ -65,6 +70,7 @@ const AboutMe = () => {
             </p>
             
             <div className="skills-section">
+            <div className="animated-line" />
               <h2 className="section-title">Skills</h2>
               <div className="skills-grid">
                 {skills.map((skill) => (

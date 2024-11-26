@@ -15,22 +15,24 @@
   }
   
   .accent-text {
-    color: var(--accent-color);  /* Will stay the same in both modes */
+    color: var(--accent-color);
   }
   
   .profile-section {
     display: flex;
-    gap: 4rem;
+    gap: 6rem;  /* Increased from 4rem to 6rem for more spacing */
     align-items: flex-start;
+    margin: 0 2rem;  /* Added horizontal margin for better content containment */
   }
   
   .profile-image-container {
     flex: 0 0 300px;
+    margin-top: 1rem;  /* Added top margin to align better with text */
   }
   
   .profile-image-placeholder {
-    width: 300px;
-    height: 300px;
+    width: 500px;
+    height: 500px;
     background-color: var(--background-secondary);
     border-radius: 8px;
     display: flex;
@@ -39,8 +41,15 @@
     color: var(--text-secondary);
   }
   
+  .profile-image-placeholder img {  /* Add this if you're using an img tag */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
   .profile-details {
     flex: 1;
+    max-width: 700px;  /* Added max-width to prevent text from stretching too wide */
   }
   
   .section-title {
@@ -114,7 +123,6 @@
     transform: scale(1.1);
   }
   
-  /* Responsive Design */
   @media (max-width: 768px) {
     .profile-section {
       flex-direction: column;
@@ -123,7 +131,8 @@
     }
   
     .profile-image-container {
-      flex: none;
+      flex: 0 0 300px;
+      margin-top: 1rem;
     }
   
     .profile-details {
