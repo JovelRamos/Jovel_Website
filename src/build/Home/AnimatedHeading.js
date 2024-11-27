@@ -50,17 +50,25 @@ const AnimatedHeading = () => {
           {char === ' ' ? '\u00A0' : char}
         </motion.span>
       ))}
-      <span className="name-wrapper">
-        {name.split('').map((char, index) => (
-          <motion.span
-            key={`name-${index}`}
-            variants={letterVariants}
-            className="inline-block accent-text"
-          >
-            {char}
-          </motion.span>
-        ))}
-      </span>
+      {name.split('').map((char, index) => (
+        <motion.span
+          key={`name-${index}`}
+          variants={letterVariants}
+          className="inline-block accent-text name-letter"
+          animate={{
+            textShadow: [
+              "none",
+              "var(--text-shadow-bold)"
+            ],
+            transition: {
+              delay: 1.5 + (index * 0.1), // Stagger the shadow animation
+              duration: 0.3
+            }
+          }}
+        >
+          {char}
+        </motion.span>
+      ))}
     </motion.h1>
   );
 };

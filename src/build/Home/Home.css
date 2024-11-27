@@ -69,7 +69,7 @@
   object-fit: cover;
   border-radius: 8px;
   animation: glowIn 1.5s ease-out forwards;
-  animation-delay: 1.5s; /* Delay until after text animation completes */
+  animation-delay: 1.5s; 
   transform: translateY(0);
   transition: transform 0.3s ease;
 }
@@ -85,23 +85,11 @@
     box-shadow: 0 4px 0px rgba(0, 0, 0, 0);
   }
   to {
-    box-shadow: 0 4px 30px var(--accent-color);
+    box-shadow: 0 4px 40px 15px var(--accent-color);
   }
 }
 
-.name-wrapper {
-  animation: textGlowIn 1.5s ease-out forwards;
-  animation-delay: 1.5s; /* Start after text animation completes */
-}
 
-@keyframes textGlowIn {
-  from {
-    text-shadow: 0 0 0px rgba(0, 0, 0, 0);
-  }
-  to {
-    text-shadow: 0 0 20px var(--accent-color);
-  }
-}
 
 .main-heading .accent-text {
   color: var(--accent-color);
@@ -109,22 +97,6 @@
   transform: translateZ(0);
 }
 
-body.dark-mode .name-wrapper {
-  animation: darkModeTextGlowIn 1.5s ease-out forwards;
-  animation-delay: 1.5s;
-}
-
-@keyframes darkModeTextGlowIn {
-  from {
-    text-shadow: var(--text-shadow-bold);
-  }
-  to {
-    text-shadow: var(--text-shadow-bold),
-      0 0 20px rgba(255, 255, 255, 0.4);
-  }
-}
-
-/* Update the portrait glow for dark mode */
 body.dark-mode .portrait-image:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 50px var(--accent-color),
@@ -132,7 +104,6 @@ body.dark-mode .portrait-image:hover {
 }
 
 
-/* Media Queries */
 @media (max-width: 1024px) {
   .main-heading {
     font-size: 4rem;
@@ -192,4 +163,20 @@ body.dark-mode .portrait-image:hover {
     width: 240px;
     height: 240px;
   }
+}
+
+.name-letter {
+  display: inline-block;
+  color: var(--accent-color);
+  position: relative;
+  text-shadow: none;
+  transition: text-shadow 0.3s ease;
+}
+
+.accent-text {
+  color: var(--accent-color);
+}
+
+.main-heading .accent-text {
+  color: var(--accent-color);
 }

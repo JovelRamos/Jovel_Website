@@ -6,7 +6,7 @@ const pageAccents = {
     '/': '#e63946',        // Home page accent
     '/about-me': '#FFD429', // About Me page accent
     '/portfolio': '#7757FF', // Portfolio page accent
-    '/contact': '##FF3E0F'   // Contact page accent
+    '/contact': '#FF3E0F'   // Contact page accent
 };
 
 export const ThemeProvider = ({ children }) => {

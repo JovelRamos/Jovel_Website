@@ -114,3 +114,19 @@ body.dark-mode h3 {
 body.dark-mode p {
   color: #e1e1e1;
 }
+
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo {
+  height: 60px;
+  width: auto;
+  margin-right: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.nav-logo:hover {
+  transform: scale(1.1);
+}
