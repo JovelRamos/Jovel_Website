@@ -4,10 +4,10 @@ A modern, responsive portfolio website built with React to showcase developer sk
 
 ## Demo
 
-Light Theme:
+Home Page:
 ![Home Page](images/demo1.jpeg)
 
-Dark Theme:
+About Me Page
 ![About Me Page](images/demo2.jpeg)
 
 ## Features
