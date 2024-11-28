@@ -1,6 +1,6 @@
 .about-container {
-    min-height: 100vh;
-    padding: 4rem 2rem;
+    padding: 0 2rem;
+    height: calc(100vh - 200px);
   }
   
   .about-content {
@@ -9,42 +9,13 @@
   }
   
   .about-title {
-    font-size: 3rem;
-    margin-bottom: 3rem;
+    font-size: 4rem;
     text-align: center;
+    margin-bottom: 0rem;
   }
   
   .accent-text {
     color: var(--accent-color);
-  }
-  
-  .profile-section {
-    display: flex;
-    gap: 6rem;  /* Increased from 4rem to 6rem for more spacing */
-    align-items: flex-start;
-    margin: 0 2rem;  /* Added horizontal margin for better content containment */
-  }
-  
-  .profile-image-container {
-    flex: 0 0 300px;
-    margin-top: 1rem;  /* Added top margin to align better with text */
-  }
-  
-  .profile-image-placeholder {
-    width: 500px;
-    height: 500px;
-    background-color: var(--background-secondary);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-secondary);
-  }
-  
-  
-  .profile-details {
-    flex: 1;
-    max-width: 700px;  /* Added max-width to prevent text from stretching too wide */
   }
   
   .section-title {
@@ -57,24 +28,11 @@
     margin-top: 0;
   }
   
-  .profile-details p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-  }
-  
+
   .skills-section {
     margin-top: 3rem;
   }
-  
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 80px);
-    gap: 2rem;
-    margin-top: 1.5rem;
-    justify-content: center;
-  }
+
   
   .skill-item {
     width: 80px;
@@ -93,7 +51,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--background-secondary);
+    background-color: var(--background-third);
     border: 2px solid transparent;
     border-radius: 12px;
     transition: all 0.3s ease;
@@ -110,39 +68,52 @@
   }
   
   .skill-item:hover .skill-background {
-    border-color: var(--skill-color);  /* Using the individual skill colors */
-    box-shadow: 0 0 20px var(--skill-color);  /* Using the individual skill colors */
+    border-color: var(--skill-color); 
+    box-shadow: 0 0 20px var(--skill-color); 
   }
   
   .skill-item:hover .skill-icon {
     transform: scale(1.1);
   }
   
-  @media (max-width: 768px) {
-    .profile-section {
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-    }
-  
-    .profile-image-container {
-      flex: 0 0 300px;
-      margin-top: 1rem;
-    }
-  
-    .profile-details {
-      text-align: center;
-    }
-  
-    .skills-grid {
-      grid-template-columns: repeat(3, 80px);
-      gap: 1.5rem;
-    }
+
+  .content-layout {
+    display: flex;
+    gap: 4rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
   }
   
-  @media (max-width: 480px) {
-    .skills-grid {
-      grid-template-columns: repeat(2, 80px);
-      gap: 1rem;
-    }
+
+  
+  .content-stack {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .content-card {
+    background: var(--background-secondary);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  body.dark-mode .content-card {
+      border: 1px solid var(--accent-color);
+  }
+
+    .content-card:hover {
+      box-shadow: 0 0 20px var(--accent-color);
+  }
+  
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
   }

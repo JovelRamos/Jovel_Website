@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import portraitImage from '../../assets/aboutme_portrait.png';
 import './AboutMe.css';
 
@@ -36,65 +37,108 @@ const AboutMe = () => {
     }
   ];
 
+  const containerVariants = {
+    initial: { opacity: 0 },
+    animate: {
+      opacity: 1,
+      transition: { duration: 2, delayChildren: 0.2, staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.6 }
+    }
+  };
+
+  const SkillIcon = ({ skill }) => (
+    <motion.div 
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3 }}
+      whileHover={{
+        scale: 1.2,
+        rotate: 5,
+        transition: { type: "spring", stiffness: 300 }
+      }}
+      className="skill-item"
+      style={{ '--skill-color': skill.color }}
+      title={skill.name}
+    >
+      <div className="skill-background" />
+      <img 
+        src={skill.icon} 
+        alt={skill.name}
+        className="skill-icon"
+        style={{ width: skill.size, height: skill.size }}
+      />
+    </motion.div>
+  );
+
   return (
-    <div className="about-container">
+    <motion.div 
+      className="about-container"
+      variants={containerVariants}
+      initial="initial"
+      animate="animate"
+    >
       <div className="about-content">
-        <h1 className="about-title">
-          About <span className="accent-text">Me</span>
-        </h1>
+        <motion.h1 
+          className="about-title"
+          variants={itemVariants}
+        >
+          ABOUT<span className="accent-text">ME</span>.md
+        </motion.h1>
         
-        <div className="profile-section">
-          <div className="profile-image-container">
-            <div className="profile-image-placeholder">
-                <img 
-                src={portraitImage} 
-                alt="Jovel's Portrait" 
-                className="portrait-image"
-              />
-            </div>
-          </div>
-          
-          <div className="profile-details">
-            <h2 className="section-title">Who I Am</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-              nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-            
-            <h2 className="section-title">My Journey</h2>
-            <p>
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-              eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt 
-              in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            
-            <div className="skills-section">
-            <div className="animated-line" />
-              <h2 className="section-title">Skills</h2>
-              <div className="skills-grid">
-                {skills.map((skill) => (
-                  <div 
-                    key={skill.name}
-                    className="skill-item"
-                    style={{ '--skill-color': skill.color }}
-                    title={skill.name}
-                  >
-                    <div className="skill-background"></div>
-                    <img 
-                      src={skill.icon} 
-                      alt={skill.name}
-                      className="skill-icon"
-                      style={{ width: skill.size, height: skill.size }}
-                    />
+        <div className="content-layout">
+          <motion.div 
+            className="portrait-section"
+            variants={itemVariants}
+            whileHover={{
+              scale: 1.05,
+              transition: { type: "spring", stiffness: 300 }
+            }}
+          >
+            <img 
+              src={portraitImage} 
+              alt="Jovel's Portrait" 
+              className="portrait-image"
+            />
+          </motion.div>
+
+          <motion.div className="content-stack" variants={itemVariants}>
+            {['Who I Am', 'My Journey', 'Skills'].map((title, index) => (
+              <motion.div 
+                key={title}
+                className="content-card"
+                variants={itemVariants}
+                whileHover={{
+                  scale: 1.02,
+                  transition: { type: "spring", stiffness: 300 }
+                }}
+              >
+                <h2 className="section-title">{title}</h2>
+                {title === 'Skills' ? (
+                  <div className="skills-grid">
+                    {skills.map((skill) => (
+                      <SkillIcon key={skill.name} skill={skill} />
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
+                ) : (
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </p>
+                )}
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

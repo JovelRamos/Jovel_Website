@@ -53,7 +53,7 @@ const NavigationMenu = () => {
           to="/about-me"
           className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}
         >
-          About Me
+          About
         </NavLink>
         <NavLink
           to="/portfolio"
