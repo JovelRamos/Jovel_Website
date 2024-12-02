@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github } from 'lucide-react'; // Fixed import name
 
+
+
 // Rest of the code remains the same, just replace GitHub component with Github
 const Portfolio = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -12,7 +14,7 @@ const Portfolio = () => {
       title: "Browser Extension",
       description: "Chrome Extensions & Web Tools",
       bgColor: "#e63946", // Home page accent
-      image: "../../images/project1.png",
+      image: "../../assets/portrait.png",
       github: "https://github.com/JovelRamos/RateMySJSU",
       projects: [
         { 
