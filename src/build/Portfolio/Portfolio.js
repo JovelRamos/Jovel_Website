@@ -7,7 +7,7 @@ const Portfolio = () => {
 
   const sections = [
     {
-    title: "WEB EXT",
+      title: "WEB EXT",
       shortTitle: "Browser Extension",
       description: "Chrome Extensions & Web Tools",
       bgColor: "#e63946",
@@ -26,7 +26,7 @@ const Portfolio = () => {
       ]
     },
     {
-      title: "iOS\nDEV",
+      title: "iOS DEV",
       shortTitle: "iOS Development",
       description: "Native Apple Applications",
       bgColor: "#FFD429",
@@ -46,7 +46,7 @@ const Portfolio = () => {
       ]
     },
     {
-      title: "WEB\nDEV",
+      title: "WEB DEV",
       shortTitle: "Web Development",
       description: "Full-Stack Web Applications",
       bgColor: "#7757FF",
@@ -104,176 +104,192 @@ const Portfolio = () => {
 
       <div style={{
         display: 'flex',
+        flexDirection: 'column',
         gap: '1rem',
-        height: '40vh',
-        margin: '2rem 0',
-        position: 'relative'
+        height: '60vh',
+        margin: '2rem 10rem',
       }}>
-        {sections.map((section, index) => (
-          <motion.div
-            key={section.title}
-            onHoverStart={() => setHoveredIndex(index)}
-            onHoverEnd={() => setHoveredIndex(null)}
-            animate={{
-              flex: hoveredIndex === index ? 4 : 1,
-              backgroundColor: hoveredIndex === index 
-                ? section.bgColor 
-                : 'var(--background-secondary)',
-            }}
-            initial={{
-              flex: 1,
-              backgroundColor: 'var(--background-secondary)',
-            }}
-            transition={{
-              flex: { duration: 0.3, ease: "easeOut" },
-              backgroundColor: { duration: 0.3 }
-            }}
+        {[0, 1].map(row => (
+          <div 
+            key={row}
             style={{
-              borderRadius: '1rem',
-              position: 'relative',
-              overflow: 'hidden',
-              cursor: 'pointer',
-              padding: 0
+              display: 'flex',
+              gap: '1rem',
+              flex: hoveredIndex !== null && Math.floor(hoveredIndex / 2) === row ? 2 : 1,
+              transition: 'flex 0.3s ease-out'
             }}
           >
-            <motion.div
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                padding: hoveredIndex === index ? '2rem' : 0,
-                background: 'linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.7), transparent)',
-                color: 'white',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: hoveredIndex === index ? 'flex-end' : 'center'
-              }}
-            >
-              {hoveredIndex === index ? (
+            {[0, 1].map(col => {
+              const index = row * 2 + col;
+              const section = sections[index];
+              return (
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
+                  key={section.title}
+                  onHoverStart={() => setHoveredIndex(index)}
+                  onHoverEnd={() => setHoveredIndex(null)}
+                  animate={{
+                    flex: hoveredIndex === index ? 4 : 1,
+                    backgroundColor: hoveredIndex === index 
+                      ? section.bgColor 
+                      : 'var(--background-secondary)',
+                  }}
+                  initial={{
+                    flex: 1,
+                    backgroundColor: 'var(--background-secondary)',
+                  }}
+                  transition={{
+                    flex: { duration: 0.3, ease: "easeOut" },
+                    backgroundColor: { duration: 0.3 }
+                  }}
+                  style={{
+                    borderRadius: '1rem',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    cursor: 'pointer',
+                    padding: 0
+                  }}
                 >
-                  <h2 style={{ 
-                    fontSize: '3rem',
-                    marginBottom: '1rem'
-                  }}>
-                    {section.shortTitle}
-                  </h2>
-                  
-                  {section.projects.map((project, idx) => (
-                    <div key={idx} style={{ marginBottom: '1rem' }}>
-                      <div style={{ 
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        gap: '1rem',
-                        marginBottom: '0.5rem'
-                      }}>
-                        <h3 style={{ 
-                          fontSize: '1.3rem',
-                          color: '#ffffff',
-                          margin: 0
+                  <motion.div
+                    style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      padding: hoveredIndex === index ? '2rem' : 0,
+                      background: 'linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.7), transparent)',
+                      color: 'white',
+                      height: '100%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: hoveredIndex === index ? 'flex-end' : 'center'
+                    }}
+                  >
+                    {hoveredIndex === index ? (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <h2 style={{ 
+                          fontSize: '3rem',
+                          marginBottom: '1rem'
                         }}>
-                          {project.name}
-                        </h3>
-                        {section.github && (
-                          <a 
-                            href={section.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                              color: 'white',
-                              opacity: 0.8,
-                              transition: 'opacity 0.2s ease'
-                            }}
-                            onMouseEnter={e => e.currentTarget.style.opacity = 1}
-                            onMouseLeave={e => e.currentTarget.style.opacity = 0.8}
-                          >
-                            <Github size={20} />
-                          </a>
-                        )}
-                      </div>
-                      <p style={{ 
-                        fontSize: '1rem', 
-                        marginBottom: '0.5rem',
-                        color: 'rgba(255, 255, 255, 0.9)'
-                      }}>
-                        {project.description}
-                      </p>
-                      <p style={{ 
-                        fontSize: '0.9rem', 
-                        marginBottom: '0.8rem',
-                        color: 'rgba(255, 255, 255, 0.7)'
-                      }}>
-                        {project.tech}
-                      </p>
-                      <ul style={{ 
-                        listStyle: 'none', 
-                        padding: 0,
-                        margin: 0 
-                      }}>
-                        {project.details.map((detail, detailIdx) => (
-                          <li 
-                            key={detailIdx}
-                            style={{ 
-                              fontSize: '0.9rem',
-                              marginBottom: '0.3rem',
-                              color: 'rgba(255, 255, 255, 0.8)',
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: '0.5rem'
-                            }}
-                          >
-                            <span style={{ color: section.bgColor }}>•</span>
-                            {detail}
-                          </li>
+                          {section.shortTitle}
+                        </h2>
+                        
+                        {section.projects.map((project, idx) => (
+                          <div key={idx} style={{ marginBottom: '1rem' }}>
+                            <div style={{ 
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              gap: '1rem',
+                              marginBottom: '0.5rem'
+                            }}>
+                              <h3 style={{ 
+                                fontSize: '1.3rem',
+                                color: '#ffffff',
+                                margin: 0
+                              }}>
+                                {project.name}
+                              </h3>
+                              {section.github && (
+                                <a 
+                                  href={section.github}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  style={{
+                                    color: 'white',
+                                    opacity: 0.8,
+                                    transition: 'opacity 0.2s ease'
+                                  }}
+                                  onMouseEnter={e => e.currentTarget.style.opacity = 1}
+                                  onMouseLeave={e => e.currentTarget.style.opacity = 0.8}
+                                >
+                                  <Github size={20} />
+                                </a>
+                              )}
+                            </div>
+                            <p style={{ 
+                              fontSize: '1rem', 
+                              marginBottom: '0.5rem',
+                              color: 'rgba(255, 255, 255, 0.9)'
+                            }}>
+                              {project.description}
+                            </p>
+                            <p style={{ 
+                              fontSize: '0.9rem', 
+                              marginBottom: '0.8rem',
+                              color: 'rgba(255, 255, 255, 0.7)'
+                            }}>
+                              {project.tech}
+                            </p>
+                            <ul style={{ 
+                              listStyle: 'none', 
+                              padding: 0,
+                              margin: 0 
+                            }}>
+                              {project.details.map((detail, detailIdx) => (
+                                <li 
+                                  key={detailIdx}
+                                  style={{ 
+                                    fontSize: '0.9rem',
+                                    marginBottom: '0.3rem',
+                                    color: 'rgba(255, 255, 255, 0.8)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.5rem'
+                                  }}
+                                >
+                                  <span style={{ color: section.bgColor }}>•</span>
+                                  {detail}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         ))}
-                      </ul>
-                    </div>
-                  ))}
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ 
+                          opacity: hoveredIndex === null ? 1 : 0
+                        }}
+                        transition={{ duration: 0.3 }}
+                        style={{ 
+                          width: '100%',
+                          height: '100%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          padding: 0,
+                          margin: 0
+                        }}
+                      >
+                        <h2 style={{ 
+                          fontSize: '15vh',
+                          fontWeight: '800',
+                          fontFamily: "'Arial Narrow', Arial, sans-serif",
+                          letterSpacing: '-0.05em',
+                          textAlign: 'center',
+                          width: '100%',
+                          margin: 0,
+                          padding: 0,
+                          lineHeight: '0.9',
+                          whiteSpace: 'pre-wrap',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          textTransform: 'uppercase'
+                        }}>
+                          {section.title}
+                        </h2>
+                      </motion.div>
+                    )}
+                  </motion.div>
                 </motion.div>
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ 
-                    opacity: hoveredIndex === null ? 1 : 0
-                  }}
-                  transition={{ duration: 0.3 }}
-                  style={{ 
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: 0,
-                    margin: 0
-                  }}
-                >
-                  <h2 style={{ 
-                    fontSize: '20vh',
-                    fontWeight: '800',
-                    fontFamily: "'Arial Narrow', Arial, sans-serif",
-                    letterSpacing: '-0.05em',
-                    textAlign: 'center',
-                    width: '100%',
-                    margin: 0,
-                    padding: 0,
-                    lineHeight: '0.9',
-                    whiteSpace: 'pre-wrap',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    textTransform: 'uppercase'
-                  }}>
-                    {section.title}
-                  </h2>
-                </motion.div>
-              )}
-            </motion.div>
-          </motion.div>
+              );
+            })}
+          </div>
         ))}
       </div>
     </div>
