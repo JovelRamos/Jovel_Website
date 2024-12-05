@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Github, Linkedin } from 'lucide-react';
 import portraitImage from '../../assets/portrait.png';
 import AnimatedHeading from './AnimatedHeading';
 import './Home.css';
@@ -20,9 +21,29 @@ const Home = () => {
           <div className="animated-line" />
           <h2 className="sub-heading">
             Computer Engineer Student
-            <br /> <span className="accent-text">
-            @ San Jose State University</span>
+            <br /> 
+            <span className="accent-text">@ San Jose State University</span>
           </h2>
+          
+          <div style={{ display: 'flex', gap: '12px'}}>
+            <a
+              href="https://www.linkedin.com/in/jovel-ramos/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-80 transition-opacity"
+            >
+              <Linkedin className="accent-text" size={30} />
+            </a>
+
+            <a
+              href="https://github.com/jovelramos"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-80 transition-opacity"
+            >
+              <Github className="accent-text" size={30} />
+            </a>
+          </div>
         </div>
         
         <motion.div 
