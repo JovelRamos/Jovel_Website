@@ -1,9 +1,156 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Github } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Github, ArrowLeft } from 'lucide-react';
+
+const ProjectPage = ({ project, section, onBack }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      style={{ 
+        minHeight: '100vh', 
+        padding: '2rem',
+        backgroundColor: section.bgColor 
+      }}
+    >
+      <button
+        onClick={onBack}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          color: 'white',
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
+          fontSize: '1.1rem',
+          marginBottom: '2rem'
+        }}
+      >
+        <ArrowLeft size={24} />
+        Back to Projects
+      </button>
+      
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '2rem'
+      }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem',
+          marginBottom: '2rem'
+        }}>
+          <h1 style={{ 
+            fontSize: '3.5rem',
+            color: 'white',
+            margin: 0
+          }}>
+            {project.name}
+          </h1>
+          {section.github && (
+            <a
+              href={section.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: 'white',
+                opacity: 0.8,
+                transition: 'opacity 0.2s ease'
+              }}
+              onMouseEnter={e => e.currentTarget.style.opacity = 1}
+              onMouseLeave={e => e.currentTarget.style.opacity = 0.8}
+            >
+              <Github size={28} />
+            </a>
+          )}
+        </div>
+
+        <div style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          backdropFilter: 'blur(10px)',
+          borderRadius: '1rem',
+          padding: '2rem',
+          color: 'white'
+        }}>
+          <p style={{ 
+            fontSize: '1.5rem',
+            marginBottom: '2rem',
+            lineHeight: 1.6
+          }}>
+            {project.description}
+          </p>
+          
+          <div style={{ marginBottom: '2rem' }}>
+            <h2 style={{
+              fontSize: '1.8rem',
+              marginBottom: '1rem'
+            }}>
+              Technologies
+            </h2>
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '0.5rem'
+            }}>
+              {project.tech.split('•').map((tech, index) => (
+                <span
+                  key={index}
+                  style={{
+                    padding: '0.5rem 1rem',
+                    borderRadius: '2rem',
+                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                    fontSize: '0.9rem'
+                  }}
+                >
+                  {tech.trim()}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h2 style={{
+              fontSize: '1.8rem',
+              marginBottom: '1rem'
+            }}>
+              Key Features
+            </h2>
+            <ul style={{
+              listStyle: 'none',
+              padding: 0,
+              margin: 0,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.8rem'
+            }}>
+              {project.details.map((detail, index) => (
+                <li
+                  key={index}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    fontSize: '1.1rem'
+                  }}
+                >
+                  <span style={{ color: 'white' }}>•</span>
+                  {detail}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 const Portfolio = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const sections = [
     {
@@ -85,6 +232,16 @@ const Portfolio = () => {
     }
   ];
 
+  if (selectedProject) {
+    return (
+      <ProjectPage
+        project={selectedProject.project}
+        section={selectedProject.section}
+        onBack={() => setSelectedProject(null)}
+      />
+    );
+  }
+
   return (
     <div style={{ 
       minHeight: '100vh', 
@@ -127,6 +284,10 @@ const Portfolio = () => {
                   key={section.title}
                   onHoverStart={() => setHoveredIndex(index)}
                   onHoverEnd={() => setHoveredIndex(null)}
+                  onClick={() => setSelectedProject({
+                    project: section.projects[0],
+                    section: section
+                  })}
                   animate={{
                     flex: hoveredIndex === index ? 4 : 1,
                     backgroundColor: hoveredIndex === index 
