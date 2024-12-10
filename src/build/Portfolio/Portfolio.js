@@ -11,7 +11,7 @@ const ProjectPage = ({ project, section, onBack }) => {
       style={{ 
         minHeight: '100vh', 
         padding: '2rem',
-        backgroundColor: section.bgColor 
+        backgroundColor: 'var(--background-color)' // Changed to use theme background
       }}
     >
       <button
@@ -20,7 +20,7 @@ const ProjectPage = ({ project, section, onBack }) => {
           display: 'flex',
           alignItems: 'center',
           gap: '0.5rem',
-          color: 'white',
+          color: 'var(--text-color)', // Changed to use theme text color
           background: 'none',
           border: 'none',
           cursor: 'pointer',
@@ -45,7 +45,7 @@ const ProjectPage = ({ project, section, onBack }) => {
         }}>
           <h1 style={{ 
             fontSize: '3.5rem',
-            color: 'white',
+            color: section.bgColor, // Changed to use section color
             margin: 0
           }}>
             {project.name}
@@ -56,21 +56,20 @@ const ProjectPage = ({ project, section, onBack }) => {
               target="_blank"
               rel="noopener noreferrer"
               style={{
-                color: 'white',
+                color: section.bgColor, // Changed to use section color
                 opacity: 0.8,
                 transition: 'opacity 0.2s ease'
               }}
               onMouseEnter={e => e.currentTarget.style.opacity = 1}
               onMouseLeave={e => e.currentTarget.style.opacity = 0.8}
             >
-              <Github size={28} />
+              <Github size={35} />
             </a>
           )}
         </div>
 
         <div style={{
-          backgroundColor: 'rgba(255, 255, 255, 0.1)',
-          backdropFilter: 'blur(10px)',
+          backgroundColor: section.bgColor, // Using section color for panel
           borderRadius: '1rem',
           padding: '2rem',
           color: 'white'
