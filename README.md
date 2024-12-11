@@ -7,8 +7,11 @@ A modern, responsive portfolio website built with React to showcase developer sk
 Home Page:
 ![Home Page](images/demo1.png)
 
-About Me Page
+About Me Page:
 ![About Me Page](images/demo2.png)
+
+Portfolio Page:
+![Portfolio Page](images/image3.png)
 
 ## Features
 
