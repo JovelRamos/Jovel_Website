@@ -134,10 +134,19 @@ body.dark-mode p {
   align-items: center;
 }
 
+.logo-wrapper {
+  position: relative;
+  width: 60px; /* Adjust based on your logo size */
+  height: 60px; /* Adjust based on your logo size */
+  margin-right: 2rem;
+}
+
 .nav-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 60px;
   width: auto;
-  margin-right: 2rem;
   transition: transform 0.3s ease;
 }
 
