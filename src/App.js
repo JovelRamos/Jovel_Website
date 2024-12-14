@@ -9,6 +9,12 @@ import Contact from './build/Contact/Contact';
 import PageTransition from './components/PageTransition';
 import { ThemeProvider } from './components/ThemeContext';
 
+// Import new project pages
+import WebExtPage from './build/Portfolio/Projects/WebExtPage';
+import IosDevelopmentPage from './build/Portfolio/Projects/IosDevelopmentPage';
+import WebDevelopmentPage from './build/Portfolio/Projects/WebDevelopmentPage';
+import UpcomingPage from './build/Portfolio/Projects/UpcomingPage';
+
 // Create a wrapper component to handle AnimatePresence
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -45,6 +51,39 @@ const AnimatedRoutes = () => {
           element={
             <PageTransition>
               <Contact />
+            </PageTransition>
+          } 
+        />
+        {/* New project routes */}
+        <Route 
+          path="/portfolio/web-ext" 
+          element={
+            <PageTransition>
+              <WebExtPage />
+            </PageTransition>
+          } 
+        />
+        <Route 
+          path="/portfolio/ios-dev" 
+          element={
+            <PageTransition>
+              <IosDevelopmentPage />
+            </PageTransition>
+          } 
+        />
+        <Route 
+          path="/portfolio/web-dev" 
+          element={
+            <PageTransition>
+              <WebDevelopmentPage />
+            </PageTransition>
+          } 
+        />
+        <Route 
+          path="/portfolio/upcoming" 
+          element={
+            <PageTransition>
+              <UpcomingPage />
             </PageTransition>
           } 
         />
