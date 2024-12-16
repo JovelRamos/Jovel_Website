@@ -1,47 +1,45 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowLeft, Github, Globe, Code2, Database } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { useTheme } from '../../../components/ThemeContext';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeft, Github, Code2 } from "lucide-react";
+import { Link } from "react-router-dom";
+import imagePreview from "../../../assets/rmsjsu_demo1.png";
 
-const ProjectPageTemplate = ({ 
-  title, 
-  description, 
-  tech, 
-  details, 
-  bgColor, 
-  githubLink 
+const ProjectPageTemplate = ({
+  title,
+  description,
+  tech,
+  details,
+  bgColor,
+  githubLink,
 }) => {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-  const [activeTech, setActiveTech] = useState(null);
+  const [hoveredFeature, setHoveredFeature] = useState(null);
 
   const mockupFeatures = [
     {
-      id: 'feature1',
-      title: 'Feature 1',
+      id: "feature1",
+      title: "Feature 1",
       description: details[0],
-      position: { top: '20%', left: '15%' }
+      position: { top: "20%", left: "15%" },
     },
     {
-      id: 'feature2',
-      title: 'Feature 2',
+      id: "feature2",
+      title: "Feature 2",
       description: details[1],
-      position: { top: '40%', left: '60%' }
+      position: { top: "40%", left: "60%" },
     },
     {
-      id: 'feature3',
-      title: 'Feature 3',
+      id: "feature3",
+      title: "Feature 3",
       description: details[2],
-      position: { top: '70%', left: '25%' }
-    }
+      position: { top: "70%", left: "25%" },
+    },
   ];
 
-  const techStack = tech.split('•').map(techItem => ({
+  const techStack = tech.split("•").map((techItem) => ({
     name: techItem.trim(),
     icon: <Code2 className="w-8 h-8" />,
     description: `Implementation using ${techItem.trim()}`,
-    usage: `Key technology in the project's development`
+    usage: `Key technology in the project's development`,
   }));
 
   return (
@@ -50,42 +48,46 @@ const ProjectPageTemplate = ({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       style={{
-        minHeight: '100vh',
-        padding: '2rem',
-        backgroundColor: 'var(--background-color)',
-        color: 'var(--text-color)',
-        transition: 'color 0.3s, background-color 0.3s'
+        minHeight: "100vh",
+        padding: "2rem",
+        backgroundColor: "var(--background-color)",
+        color: "var(--text-color)",
+        transition: "color 0.3s, background-color 0.3s",
       }}
     >
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <Link
           to="/portfolio"
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            color: 'var(--text-color)',
-            textDecoration: 'none',
-            marginBottom: '2rem',
-            transition: 'color 0.3s'
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            color: "var(--text-color)",
+            textDecoration: "none",
+            marginBottom: "2rem",
+            transition: "color 0.3s",
           }}
         >
           <ArrowLeft size={24} />
           Back to Projects
         </Link>
 
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '1rem',
-          marginBottom: '3rem'
-        }}>
-          <h1 style={{
-            fontSize: '3.5rem',
-            margin: 0,
-            color: bgColor,
-            fontWeight: 'bold'
-          }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "1rem",
+            marginBottom: "3rem",
+          }}
+        >
+          <h1
+            style={{
+              fontSize: "3.5rem",
+              margin: 0,
+              color: bgColor,
+              fontWeight: "bold",
+            }}
+          >
             {title}
           </h1>
           {githubLink && (
@@ -94,8 +96,8 @@ const ProjectPageTemplate = ({
               target="_blank"
               rel="noopener noreferrer"
               style={{
-                color: 'var(--text-color)',
-                transition: 'color 0.3s'
+                color: "var(--text-color)",
+                transition: "color 0.3s",
               }}
             >
               <Github size={35} />
@@ -103,132 +105,229 @@ const ProjectPageTemplate = ({
           )}
         </div>
 
-        {/* Interactive Preview and Overview Section */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '2rem',
-          marginBottom: '3rem'
-        }}>
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.2 }}
+        {/* Overview  */}
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.2 }}
+          style={{
+            backgroundColor: "var(--background-secondary)",
+            borderRadius: "1rem",
+            padding: "2rem",
+            marginBottom: "3rem",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <h2
             style={{
-              backgroundColor: 'var(--background-secondary)',
-              borderRadius: '1rem',
-              padding: '2rem',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+              fontSize: "1.5rem",
+              fontWeight: 600,
+              marginBottom: "1rem",
+              color: bgColor,
             }}
           >
-            <h2 style={{
-              fontSize: '1.5rem',
+            Overview
+          </h2>
+          <p
+            style={{
+              color: "var(--text-secondary)",
+              lineHeight: 1.6,
+            }}
+          >
+            {description}
+          </p>
+        </motion.div>
+
+        {/* Interactive Preview */}
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.2 }}
+          style={{
+            backgroundColor: "var(--background-secondary)",
+            borderRadius: "1rem",
+            overflow: "hidden",
+            marginBottom: "3rem",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <h2
+            style={{
+              fontSize: "1.5rem",
               fontWeight: 600,
-              marginBottom: '1rem',
-              color: bgColor
-            }}>
-              Interactive Preview
-            </h2>
-            <div style={{
-              position: 'relative',
-              width: '100%',
-              height: '300px',
-              backgroundColor: 'var(--background-third)',
-              borderRadius: '0.5rem',
-              boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.1)'
-            }}>
+              margin: "2rem",
+              color: bgColor,
+            }}
+          >
+            Interactive Preview
+          </h2>
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              height: "auto",
+              backgroundColor: "var(--background-third)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                maxWidth: "1200px",
+                margin: "0 auto",
+              }}
+            >
+              <img
+                src={imagePreview}
+                alt="Project Preview"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  display: "block",
+                  margin: "0 auto",
+                }}
+              />
               {mockupFeatures.map((feature) => (
                 <motion.div
                   key={feature.id}
                   style={{
-                    position: 'absolute',
-                    ...feature.position
+                    position: "absolute",
+                    ...feature.position,
                   }}
-                  whileHover={{ scale: 1.1 }}
+                  onHoverStart={() => setHoveredFeature(feature)}
+                  onHoverEnd={() => setHoveredFeature(null)}
+                  whileHover={{ scale: 1.2 }}
                 >
-                  <div style={{
-                    width: '1rem',
-                    height: '1rem',
-                    borderRadius: '50%',
-                    backgroundColor: bgColor,
-                    cursor: 'pointer'
-                  }} />
+                  <motion.span
+                    style={{
+                      display: "block",
+                      width: "1rem",
+                      height: "1rem",
+                      borderRadius: "50%",
+                      backgroundColor: bgColor,
+                      cursor: "pointer",
+                    }}
+                  />
+                  <motion.span
+                    style={{
+                      position: "absolute",
+                      top: "-4px",
+                      left: "-4px",
+                      width: "24px",
+                      height: "24px",
+                      borderRadius: "50%",
+                      border: `2px solid ${bgColor}`,
+                      opacity: 0.5,
+                    }}
+                    animate={{ scale: [1, 1.5, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+
+                  <AnimatePresence>
+                    {hoveredFeature?.id === feature.id && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                        transition={{ duration: 0.2 }}
+                        style={{
+                          position: "absolute",
+                          top: "100%",
+                          left: "50%",
+                          transform: "translateX(-50%)",
+                          backgroundColor: "var(--background-secondary)",
+                          padding: "1rem",
+                          borderRadius: "0.5rem",
+                          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                          width: "200px",
+                          zIndex: 10,
+                          pointerEvents: "none",
+                        }}
+                      >
+                        <h3
+                          style={{
+                            fontSize: "1rem",
+                            fontWeight: 600,
+                            marginBottom: "0.5rem",
+                            color: bgColor,
+                          }}
+                        >
+                          {feature.title}
+                        </h3>
+                        <p
+                          style={{
+                            fontSize: "0.875rem",
+                            color: "var(--text-secondary)",
+                            margin: 0,
+                          }}
+                        >
+                          {feature.description}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               ))}
             </div>
-          </motion.div>
+          </div>
+        </motion.div>
 
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.2 }}
+        {/* Tech Stack*/}
+        <div style={{ marginBottom: "3rem" }}>
+          <h2
             style={{
-              backgroundColor: 'var(--background-secondary)',
-              borderRadius: '1rem',
-              padding: '2rem',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+              fontSize: "1.5rem",
+              fontWeight: 600,
+              marginBottom: "1.5rem",
+              color: bgColor,
             }}
           >
-            <h2 style={{
-              fontSize: '1.5rem',
-              fontWeight: 600,
-              marginBottom: '1rem',
-              color: bgColor
-            }}>
-              Overview
-            </h2>
-            <p style={{
-              color: 'var(--text-secondary)',
-              lineHeight: 1.6
-            }}>
-              {description}
-            </p>
-          </motion.div>
-        </div>
-
-        {/* Tech Stack Section */}
-        <div style={{ marginBottom: '3rem' }}>
-          <h2 style={{
-            fontSize: '1.5rem',
-            fontWeight: 600,
-            marginBottom: '1.5rem',
-            color: bgColor
-          }}>
             Technology Stack
           </h2>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '1.5rem'
-          }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+              gap: "1.5rem",
+            }}
+          >
             {techStack.map((tech) => (
               <motion.div
                 key={tech.name}
                 whileHover={{ scale: 1.05 }}
                 style={{
-                  backgroundColor: 'var(--background-secondary)',
-                  borderRadius: '1rem',
-                  padding: '1.5rem',
-                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+                  backgroundColor: "var(--background-secondary)",
+                  borderRadius: "1rem",
+                  padding: "1.5rem",
+                  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
                 }}
               >
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '1rem',
-                  marginBottom: '1rem'
-                }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "1rem",
+                    marginBottom: "1rem",
+                  }}
+                >
                   <div style={{ color: bgColor }}>{tech.icon}</div>
-                  <h3 style={{
-                    fontSize: '1.25rem',
-                    fontWeight: 600,
-                    color: 'var(--text-color)'
-                  }}>
+                  <h3
+                    style={{
+                      fontSize: "1.25rem",
+                      fontWeight: 600,
+                      color: "var(--text-color)",
+                    }}
+                  >
                     {tech.name}
                   </h3>
                 </div>
-                <p style={{
-                  color: 'var(--text-secondary)',
-                  fontSize: '0.875rem'
-                }}>
+                <p
+                  style={{
+                    color: "var(--text-secondary)",
+                    fontSize: "0.875rem",
+                  }}
+                >
                   {tech.usage}
                 </p>
               </motion.div>
@@ -236,53 +335,61 @@ const ProjectPageTemplate = ({
           </div>
         </div>
 
-        {/* Features Section */}
+        {/* Features*/}
         <motion.div
           whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.2 }}
           style={{
-            backgroundColor: 'var(--background-secondary)',
-            borderRadius: '1rem',
-            padding: '2rem',
-            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+            backgroundColor: "var(--background-secondary)",
+            borderRadius: "1rem",
+            padding: "2rem",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
           }}
         >
-          <h2 style={{
-            fontSize: '1.5rem',
-            fontWeight: 600,
-            marginBottom: '1.5rem',
-            color: bgColor
-          }}>
+          <h2
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: 600,
+              marginBottom: "1.5rem",
+              color: bgColor,
+            }}
+          >
             Key Features
           </h2>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '1.5rem'
-          }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+              gap: "1.5rem",
+            }}
+          >
             {details.map((detail, index) => (
               <motion.div
                 key={index}
                 whileHover={{ scale: 1.05 }}
                 style={{
-                  backgroundColor: 'var(--background-third)',
-                  borderRadius: '0.5rem',
-                  padding: '1rem',
-                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+                  backgroundColor: "var(--background-third)",
+                  borderRadius: "0.5rem",
+                  padding: "1rem",
+                  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                 }}
               >
-                <h3 style={{
-                  fontSize: '1rem',
-                  fontWeight: 600,
-                  marginBottom: '0.5rem',
-                  color: 'var(--text-color)'
-                }}>
+                <h3
+                  style={{
+                    fontSize: "1rem",
+                    fontWeight: 600,
+                    marginBottom: "0.5rem",
+                    color: "var(--text-color)",
+                  }}
+                >
                   Feature {index + 1}
                 </h3>
-                <p style={{
-                  fontSize: '0.875rem',
-                  color: 'var(--text-secondary)'
-                }}>
+                <p
+                  style={{
+                    fontSize: "0.875rem",
+                    color: "var(--text-secondary)",
+                  }}
+                >
                   {detail}
                 </p>
               </motion.div>
