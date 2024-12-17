@@ -13,7 +13,7 @@ const IosDevelopmentPage = () => {
       "Deep Apple ecosystem integration"
     ],
     bgColor: "#FFD429",
-    githubLink: "https://github.com/athehmd/Reflect"
+    githubLink: "https://github.com/athehmd/Reflect",
   };
 
   return <ProjectPageTemplate {...projectData} />;

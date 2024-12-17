@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectPageTemplate from './ProjectPageTemplate';
+import imagePreview from '../../../assets/rmsjsu_demo1.png';  // Add this import
 
 const WebExtPage = () => {
   const projectData = {
@@ -12,7 +13,8 @@ const WebExtPage = () => {
       "Built with jQuery DataTables"
     ],
     bgColor: "#e63946",
-    githubLink: "https://github.com/JovelRamos/RateMySJSU"
+    githubLink: "https://github.com/JovelRamos/RateMySJSU",
+    imagePreview: imagePreview  
   };
 
   return <ProjectPageTemplate {...projectData} />;

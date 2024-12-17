@@ -13,7 +13,9 @@ const WebDevelopmentPage = () => {
       "Modern UI/UX"
     ],
     bgColor: "#7757FF",
-    githubLink: "https://github.com/JovelRamos/Jovel_Website"
+    githubLink: "https://github.com/JovelRamos/Jovel_Website",
+    showPreview: false
+
   };
 
   return <ProjectPageTemplate {...projectData} />;

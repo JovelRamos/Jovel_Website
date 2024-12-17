@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, Github, Code2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import imagePreview from "../../../assets/rmsjsu_demo1.png";
+
 
 const ProjectPageTemplate = ({
   title,
@@ -11,6 +11,8 @@ const ProjectPageTemplate = ({
   details,
   bgColor,
   githubLink,
+  showPreview = true, // New prop with default value
+  imagePreview,
 }) => {
   const [hoveredFeature, setHoveredFeature] = useState(null);
 
@@ -138,140 +140,142 @@ const ProjectPageTemplate = ({
         </motion.div>
 
         {/* Interactive Preview */}
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.2 }}
-          style={{
-            backgroundColor: "var(--background-secondary)",
-            borderRadius: "1rem",
-            overflow: "hidden",
-            marginBottom: "3rem",
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-          }}
-        >
-          <h2
+        {showPreview && imagePreview && (
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
             style={{
-              fontSize: "1.5rem",
-              fontWeight: 600,
-              margin: "2rem",
-              color: bgColor,
+              backgroundColor: "var(--background-secondary)",
+              borderRadius: "1rem",
+              overflow: "hidden",
+              marginBottom: "3rem",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
             }}
           >
-            Interactive Preview
-          </h2>
-          <div
-            style={{
-              position: "relative",
-              width: "100%",
-              height: "auto",
-              backgroundColor: "var(--background-third)",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+            <h2
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: 600,
+                margin: "2rem",
+                color: bgColor,
+              }}
+            >
+              Interactive Preview
+            </h2>
             <div
               style={{
                 position: "relative",
                 width: "100%",
-                maxWidth: "1200px",
-                margin: "0 auto",
+                height: "auto",
+                backgroundColor: "var(--background-third)",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
-              <img
-                src={imagePreview}
-                alt="Project Preview"
+              <div
                 style={{
+                  position: "relative",
                   width: "100%",
-                  height: "auto",
-                  display: "block",
+                  maxWidth: "1200px",
                   margin: "0 auto",
                 }}
-              />
-              {mockupFeatures.map((feature) => (
-                <motion.div
-                  key={feature.id}
+              >
+                <img
+                  src={imagePreview}
+                  alt="Project Preview"
                   style={{
-                    position: "absolute",
-                    ...feature.position,
+                    width: "100%",
+                    height: "auto",
+                    display: "block",
+                    margin: "0 auto",
                   }}
-                  onHoverStart={() => setHoveredFeature(feature)}
-                  onHoverEnd={() => setHoveredFeature(null)}
-                  whileHover={{ scale: 1.2 }}
-                >
-                  <motion.span
-                    style={{
-                      display: "block",
-                      width: "1rem",
-                      height: "1rem",
-                      borderRadius: "50%",
-                      backgroundColor: bgColor,
-                      cursor: "pointer",
-                    }}
-                  />
-                  <motion.span
+                />
+                {mockupFeatures.map((feature) => (
+                  <motion.div
+                    key={feature.id}
                     style={{
                       position: "absolute",
-                      top: "-4px",
-                      left: "-4px",
-                      width: "24px",
-                      height: "24px",
-                      borderRadius: "50%",
-                      border: `2px solid ${bgColor}`,
-                      opacity: 0.5,
+                      ...feature.position,
                     }}
-                    animate={{ scale: [1, 1.5, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
+                    onHoverStart={() => setHoveredFeature(feature)}
+                    onHoverEnd={() => setHoveredFeature(null)}
+                    whileHover={{ scale: 1.2 }}
+                  >
+                    <motion.span
+                      style={{
+                        display: "block",
+                        width: "1rem",
+                        height: "1rem",
+                        borderRadius: "50%",
+                        backgroundColor: bgColor,
+                        cursor: "pointer",
+                      }}
+                    />
+                    <motion.span
+                      style={{
+                        position: "absolute",
+                        top: "-4px",
+                        left: "-4px",
+                        width: "24px",
+                        height: "24px",
+                        borderRadius: "50%",
+                        border: `2px solid ${bgColor}`,
+                        opacity: 0.5,
+                      }}
+                      animate={{ scale: [1, 1.5, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
 
-                  <AnimatePresence>
-                    {hoveredFeature?.id === feature.id && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                        transition={{ duration: 0.2 }}
-                        style={{
-                          position: "absolute",
-                          top: "100%",
-                          left: "50%",
-                          transform: "translateX(-50%)",
-                          backgroundColor: "var(--background-secondary)",
-                          padding: "1rem",
-                          borderRadius: "0.5rem",
-                          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                          width: "200px",
-                          zIndex: 10,
-                          pointerEvents: "none",
-                        }}
-                      >
-                        <h3
+                    <AnimatePresence>
+                      {hoveredFeature?.id === feature.id && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                          transition={{ duration: 0.2 }}
                           style={{
-                            fontSize: "1rem",
-                            fontWeight: 600,
-                            marginBottom: "0.5rem",
-                            color: bgColor,
+                            position: "absolute",
+                            top: "100%",
+                            left: "50%",
+                            transform: "translateX(-50%)",
+                            backgroundColor: "var(--background-secondary)",
+                            padding: "1rem",
+                            borderRadius: "0.5rem",
+                            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                            width: "200px",
+                            zIndex: 10,
+                            pointerEvents: "none",
                           }}
                         >
-                          {feature.title}
-                        </h3>
-                        <p
-                          style={{
-                            fontSize: "0.875rem",
-                            color: "var(--text-secondary)",
-                            margin: 0,
-                          }}
-                        >
-                          {feature.description}
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              ))}
+                          <h3
+                            style={{
+                              fontSize: "1rem",
+                              fontWeight: 600,
+                              marginBottom: "0.5rem",
+                              color: bgColor,
+                            }}
+                          >
+                            {feature.title}
+                          </h3>
+                          <p
+                            style={{
+                              fontSize: "0.875rem",
+                              color: "var(--text-secondary)",
+                              margin: 0,
+                            }}
+                          >
+                            {feature.description}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                ))}
+              </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        )}
 
         {/* Tech Stack*/}
         <div style={{ marginBottom: "3rem" }}>
