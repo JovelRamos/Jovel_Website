@@ -6,27 +6,67 @@ const Contact = () => {
     email: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+    
+    try {
+      // Simulated API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   return (
-    <div className="contact-container" style={{ minHeight: '100vh', padding: '2rem' }}>
-      <h1 className="main-heading">
-        Get in <span className="accent-text">Touch</span>
+    <div className="contact-container" style={{ 
+      minHeight: '100vh', 
+      padding: '2rem',
+      backgroundColor: 'var(--background-color, white)'
+    }}>
+      <h1 className="main-heading" style={{
+        textAlign: 'center',
+        marginBottom: '1rem'
+      }}>
+        Get in <span className="accent-text" style={{ color: 'var(--accent-color, #3498db)' }}>Touch</span>
       </h1>
-      <div className="animated-line" />
+      <div className="animated-line" style={{
+        width: '60px',
+        height: '4px',
+        backgroundColor: 'var(--accent-color, #3498db)',
+        margin: '0 auto 2rem',
+        borderRadius: '2px'
+      }} />
       
+      {submitStatus === 'success' && (
+        <div style={{
+          maxWidth: '600px',
+          margin: '0 auto 1rem',
+          padding: '1rem',
+          backgroundColor: '#e8f5e9',
+          borderRadius: '4px',
+          color: '#2e7d32',
+          textAlign: 'center'
+        }}>
+          Message sent successfully!
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} style={{
         maxWidth: '600px',
         margin: '2rem auto',
@@ -35,7 +75,11 @@ const Contact = () => {
         gap: '1.5rem'
       }}>
         <div className="form-group">
-          <label htmlFor="name" style={{ display: 'block', marginBottom: '0.5rem' }}>Name</label>
+          <label htmlFor="name" style={{ 
+            display: 'block', 
+            marginBottom: '0.5rem',
+            color: 'var(--text-color, #333)'
+          }}>Name</label>
           <input
             type="text"
             id="name"
@@ -47,15 +91,21 @@ const Contact = () => {
               width: '100%',
               padding: '0.75rem',
               borderRadius: '4px',
-              border: '1px solid var(--text-secondary)',
-              backgroundColor: 'var(--background-secondary)',
-              color: 'var(--text-color)'
+              border: '1px solid var(--border-color, #ddd)',
+              backgroundColor: 'var(--input-background, white)',
+              color: 'var(--text-color, #333)',
+              transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+              outline: 'none'
             }}
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="email" style={{ display: 'block', marginBottom: '0.5rem' }}>Email</label>
+          <label htmlFor="email" style={{ 
+            display: 'block', 
+            marginBottom: '0.5rem',
+            color: 'var(--text-color, #333)'
+          }}>Email</label>
           <input
             type="email"
             id="email"
@@ -67,15 +117,21 @@ const Contact = () => {
               width: '100%',
               padding: '0.75rem',
               borderRadius: '4px',
-              border: '1px solid var(--text-secondary)',
-              backgroundColor: 'var(--background-secondary)',
-              color: 'var(--text-color)'
+              border: '1px solid var(--border-color, #ddd)',
+              backgroundColor: 'var(--input-background, white)',
+              color: 'var(--text-color, #333)',
+              transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+              outline: 'none'
             }}
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="message" style={{ display: 'block', marginBottom: '0.5rem' }}>Message</label>
+          <label htmlFor="message" style={{ 
+            display: 'block', 
+            marginBottom: '0.5rem',
+            color: 'var(--text-color, #333)'
+          }}>Message</label>
           <textarea
             id="message"
             name="message"
@@ -87,27 +143,35 @@ const Contact = () => {
               width: '100%',
               padding: '0.75rem',
               borderRadius: '4px',
-              border: '1px solid var(--text-secondary)',
-              backgroundColor: 'var(--background-secondary)',
-              color: 'var(--text-color)',
-              resize: 'vertical'
+              border: '1px solid var(--border-color, #ddd)',
+              backgroundColor: 'var(--input-background, white)',
+              color: 'var(--text-color, #333)',
+              resize: 'vertical',
+              transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+              outline: 'none'
             }}
           />
         </div>
 
         <button
           type="submit"
+          disabled={isSubmitting}
           style={{
             padding: '0.75rem 1.5rem',
-            backgroundColor: 'var(--accent-color)',
+            backgroundColor: 'var(--accent-color, #3498db)',
             color: 'white',
             border: 'none',
             borderRadius: '4px',
-            cursor: 'pointer',
-            transition: 'background-color 0.3s ease'
+            cursor: isSubmitting ? 'not-allowed' : 'pointer',
+            transition: 'background-color 0.3s ease, transform 0.1s ease',
+            opacity: isSubmitting ? 0.7 : 1,
+            transform: 'scale(1)',
+            ':active': {
+              transform: 'scale(0.98)'
+            }
           }}
         >
-          Send Message
+          {isSubmitting ? 'Sending...' : 'Send Message'}
         </button>
       </form>
     </div>
