@@ -33,6 +33,17 @@ const Contact = () => {
     }));
   };
 
+  const inputStyles = {
+    width: '100%',
+    padding: '0.75rem',
+    borderRadius: '4px',
+    border: '1px solid var(--border-color, #ddd)',
+    backgroundColor: 'var(--input-background, white)',
+    color: '#000', // Fixed color for dark mode visibility
+    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+    outline: 'none'
+  };
+
   return (
     <div className="contact-container" style={{ 
       minHeight: '100vh', 
@@ -87,16 +98,7 @@ const Contact = () => {
             value={formData.name}
             onChange={handleChange}
             required
-            style={{
-              width: '100%',
-              padding: '0.75rem',
-              borderRadius: '4px',
-              border: '1px solid var(--border-color, #ddd)',
-              backgroundColor: 'var(--input-background, white)',
-              color: 'var(--text-color, #333)',
-              transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-              outline: 'none'
-            }}
+            style={inputStyles}
           />
         </div>
 
@@ -113,16 +115,7 @@ const Contact = () => {
             value={formData.email}
             onChange={handleChange}
             required
-            style={{
-              width: '100%',
-              padding: '0.75rem',
-              borderRadius: '4px',
-              border: '1px solid var(--border-color, #ddd)',
-              backgroundColor: 'var(--input-background, white)',
-              color: 'var(--text-color, #333)',
-              transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-              outline: 'none'
-            }}
+            style={inputStyles}
           />
         </div>
 
@@ -140,15 +133,8 @@ const Contact = () => {
             required
             rows="5"
             style={{
-              width: '100%',
-              padding: '0.75rem',
-              borderRadius: '4px',
-              border: '1px solid var(--border-color, #ddd)',
-              backgroundColor: 'var(--input-background, white)',
-              color: 'var(--text-color, #333)',
-              resize: 'vertical',
-              transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-              outline: 'none'
+              ...inputStyles,
+              resize: 'vertical'
             }}
           />
         </div>
