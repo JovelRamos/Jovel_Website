@@ -139,7 +139,7 @@ const Portfolio = () => {
                   key={section.title}
                   onHoverStart={() => setHoveredIndex(index)}
                   onHoverEnd={() => setHoveredIndex(null)}
-                  onClick={() => handleClick(section.path)}  // Add this line
+                  onClick={() => handleClick(section.path)}
                   animate={{
                     flex: hoveredIndex === index ? 4 : 1,
                     backgroundColor: hoveredIndex === index 
@@ -159,7 +159,7 @@ const Portfolio = () => {
                     position: 'relative',
                     overflow: 'hidden',
                     padding: 0,
-                    cursor: 'pointer'  // Add this line
+                    cursor: 'pointer'
                   }}
                 >
                   <motion.div
@@ -184,7 +184,7 @@ const Portfolio = () => {
                         transition={{ duration: 0.3 }}
                       >
                         <h2 style={{ 
-                          fontSize: '3rem',
+                          fontSize: '3.5rem',  // Increased from 3rem
                           marginBottom: '1rem'
                         }}>
                           {section.shortTitle}
@@ -199,7 +199,7 @@ const Portfolio = () => {
                               marginBottom: '0.5rem'
                             }}>
                               <h3 style={{ 
-                                fontSize: '1.3rem',
+                                fontSize: '1.8rem',  // Increased from 1.3rem
                                 color: '#ffffff',
                                 margin: 0
                               }}>
@@ -218,19 +218,19 @@ const Portfolio = () => {
                                   onMouseEnter={e => e.currentTarget.style.opacity = 1}
                                   onMouseLeave={e => e.currentTarget.style.opacity = 0.8}
                                 >
-                                  <Github size={20} />
+                                  <Github size={28} />  
                                 </a>
                               )}
                             </div>
                             <p style={{ 
-                              fontSize: '1rem', 
+                              fontSize: '1.4rem',  // Increased from 1rem
                               marginBottom: '0.5rem',
                               color: 'rgba(255, 255, 255, 0.9)'
                             }}>
                               {project.description}
                             </p>
                             <p style={{ 
-                              fontSize: '0.9rem', 
+                              fontSize: '1.2rem',  // Increased from 0.9rem
                               marginBottom: '0.8rem',
                               color: 'rgba(255, 255, 255, 0.7)'
                             }}>
@@ -245,7 +245,7 @@ const Portfolio = () => {
                                 <li 
                                   key={detailIdx}
                                   style={{ 
-                                    fontSize: '0.9rem',
+                                    fontSize: '1.1rem',  // Increased from 0.9rem
                                     marginBottom: '0.3rem',
                                     color: 'rgba(255, 255, 255, 0.8)',
                                     display: 'flex',
