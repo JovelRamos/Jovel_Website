@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Jovel_Website/static/css/main.34e1136a.css",
+    "main.js": "/Jovel_Website/static/js/main.8328ba80.js",
+    "static/js/453.8f8fd991.chunk.js": "/Jovel_Website/static/js/453.8f8fd991.chunk.js",
+    "static/media/rmsjsu_demo1.png": "/Jovel_Website/static/media/rmsjsu_demo1.1bea414195b569843347.png",
+    "static/media/portrait.png": "/Jovel_Website/static/media/portrait.8a30a06c70a4449a08b0.png",
+    "static/media/aboutme_portrait.png": "/Jovel_Website/static/media/aboutme_portrait.620947aefc9c1067fabe.png",
+    "static/media/logo_initials_home.png": "/Jovel_Website/static/media/logo_initials_home.542543d0a07ce1c82bbc.png",
+    "static/media/logo_initials_portfolio.png": "/Jovel_Website/static/media/logo_initials_portfolio.65e17551b913e54aa453.png",
+    "static/media/logo_initials_about.png": "/Jovel_Website/static/media/logo_initials_about.69776178ff24e28602ed.png",
+    "static/media/logo_initials_contact.png": "/Jovel_Website/static/media/logo_initials_contact.13d162ecdb0a3a4e1c67.png",
+    "index.html": "/Jovel_Website/index.html",
+    "main.34e1136a.css.map": "/Jovel_Website/static/css/main.34e1136a.css.map",
+    "main.8328ba80.js.map": "/Jovel_Website/static/js/main.8328ba80.js.map",
+    "453.8f8fd991.chunk.js.map": "/Jovel_Website/static/js/453.8f8fd991.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.34e1136a.css",
+    "static/js/main.8328ba80.js"
+  ]
+}
