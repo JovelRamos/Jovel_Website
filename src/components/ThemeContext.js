@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 
 const ThemeContext = createContext();
 
+// Define accent colors for each route
 const pageAccents = {
     '/': '#e63946',        // Home page accent
     '/about-me': '#FFD429', // About Me page accent
@@ -10,62 +11,57 @@ const pageAccents = {
 };
 
 export const ThemeProvider = ({ children }) => {
+  // Initialize darkMode from localStorage or system preference
   const [darkMode, setDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem('darkMode');
-    return savedTheme ? JSON.parse(savedTheme) : false;
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      return savedTheme === 'dark';
+    }
+    // Check system preference
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
   
   const [accentColor, setAccentColor] = useState(pageAccents['/']);
-
-  const adjustColor = (color, amount) => {
-    const clamp = (num) => Math.min(Math.max(num, 0), 255);
-    
-    color = color.replace('#', '');
-    const num = parseInt(color, 16);
-    let r = (num >> 16) + amount;
-    let g = ((num >> 8) & 0x00FF) + amount;
-    let b = (num & 0x0000FF) + amount;
-    
-    return `#${(
-      0x1000000 +
-      (clamp(r) << 16) +
-      (clamp(g) << 8) +
-      clamp(b)
-    ).toString(16).slice(1)}`;
-  };
 
   // Update accent color based on path
   const updateAccentForPath = useCallback((path) => {
     const newAccent = pageAccents[path] || pageAccents['/'];
     setAccentColor(newAccent);
+    
+    // Update CSS custom property for accent color
+    document.documentElement.style.setProperty('--accent-color', newAccent);
   }, []);
 
-  // Update CSS variables whenever theme or accent changes
+  // Effect to handle theme changes
   useEffect(() => {
     const root = document.documentElement;
     
-    // Set theme colors
     if (darkMode) {
-      root.style.setProperty('--background-color', '#121212');
-      root.style.setProperty('--text-color', '#ffffff');
-      root.style.setProperty('--text-secondary', '#e1e1e1');
-      document.body.className = 'dark-mode';
+      root.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     } else {
-      root.style.setProperty('--background-color', '#f9f9f9');
-      root.style.setProperty('--text-color', '#333333');
-      root.style.setProperty('--text-secondary', '#666666');
-      document.body.className = 'light-mode';
+      root.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
+  }, [darkMode]);
 
-    // Set accent colors
-    root.style.setProperty('--accent-color', accentColor);
-    root.style.setProperty('--accent-hover', adjustColor(accentColor, darkMode ? 20 : -20));
+  // Effect to handle system theme changes
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
-  }, [darkMode, accentColor]);
+    const handleChange = (e) => {
+      if (!localStorage.getItem('theme')) {
+        setDarkMode(e.matches);
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   const toggleTheme = () => {
-    setDarkMode(!darkMode);
+    setDarkMode(prev => !prev);
   };
 
   return (

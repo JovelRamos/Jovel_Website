@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useTheme } from './ThemeContext';
 import { motion } from 'framer-motion';
-import './NavigationMenu.css';
 
 // Import all logo images
 import logoHome from '../assets/logo_initials_home.png';
@@ -62,14 +61,14 @@ const NavigationMenu = () => {
   };
 
   return (
-    <div className="nav-wrapper">
-      <nav className={`nav-menu ${darkMode ? 'dark' : 'light'}`}>
-        <div className="nav-left">
-          <div className="logo-wrapper">
+    <div className="sticky top-0 z-50 bg-white transition-colors duration-300 dark:bg-gray-900">
+      <nav className={`flex items-center justify-between px-8 py-4`}>
+        <div className="flex items-center">
+          <div className="relative w-16 h-16 mr-8">
             <motion.img 
               src={currentLogo}
               alt="Logo"
-              className="nav-logo"
+              className="absolute top-0 left-0 h-16 w-auto transition-transform duration-300 hover:scale-110"
               animate={{
                 opacity: [0, 1],
                 y: [20, 0],
@@ -85,48 +84,69 @@ const NavigationMenu = () => {
             />
           </div>
           <motion.div 
-            className="menu-items"
+            className="flex gap-8"
             variants={containerVariants}
             initial="initial"
             animate="animate"
             key={location.pathname}
           >
-            <motion.div variants={itemVariants}>
-              <NavLink
-                to="/"
-                className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}
-              >
-                Home
-              </NavLink>
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <NavLink
-                to="/about-me"
-                className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}
-              >
-                About Me
-              </NavLink>
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <NavLink
-                to="/portfolio"
-                className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}
-              >
-                Portfolio
-              </NavLink>
-            </motion.div>
-            <motion.div variants={itemVariants}>
-              <NavLink
-                to="/contact"
-                className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}
-              >
-                Contact
-              </NavLink>
-            </motion.div>
+            {[
+              { to: '/', text: 'Home' },
+              { to: '/about-me', text: 'About Me' },
+              { to: '/portfolio', text: 'Portfolio' },
+              { to: '/contact', text: 'Contact' }
+            ].map((link) => (
+              <motion.div key={link.to} variants={itemVariants}>
+                <NavLink
+                  to={link.to}
+                  className={({ isActive }) => `
+                    relative text-lg transition-colors duration-300
+                    ${isActive ? 'font-bold' : 'font-normal'}
+                    ${isActive 
+                      ? 'transition-colors duration-300' 
+                      : 'dark:text-white text-gray-800'
+                    }
+                    hover:text-current
+                    before:content-['']
+                    before:absolute
+                    before:bottom-0
+                    before:left-0
+                    before:w-full
+                    before:h-0.5
+                    before:transform
+                    before:scale-x-0
+                    before:origin-left
+                    before:transition-transform
+                    before:duration-300
+                    hover:before:scale-x-100
+                    ${isActive ? 'before:scale-x-100' : ''}
+                  `}
+                  style={({ isActive }) => 
+                    isActive 
+                      ? { 
+                          color: accentColor,
+                          '--before-bg-color': accentColor,
+                        } 
+                      : {
+                          '--before-bg-color': 'currentColor'
+                        }
+                  }
+                >
+                  {link.text}
+                </NavLink>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
         <motion.button 
-          className="theme-toggle" 
+          className={`
+            px-4 py-2 text-base rounded
+            border transition-all duration-300
+            ${darkMode 
+              ? 'border-white text-white hover:bg-white hover:text-gray-900' 
+              : 'border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white'
+            }
+          `}
           onClick={toggleTheme}
           variants={itemVariants}
           initial="initial"
@@ -137,7 +157,8 @@ const NavigationMenu = () => {
         </motion.button>
       </nav>
       <motion.div
-        className="nav-accent-bar"
+                  className="h-1 w-full opacity-80 transition-colors duration-300"
+          style={{ backgroundColor: accentColor }}
         animate={{
           backgroundColor: accentColor,
           transition: { duration: 0.3 }

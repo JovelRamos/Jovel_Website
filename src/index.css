@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --background-color: #f9f9f9;
   --background-secondary: #ffefef;  
@@ -15,6 +19,10 @@
   0 6px 0 #000,
   0 7px 0 rgba(0, 0, 0, 0.9),
   0 8px 7px rgba(0, 0, 0, 0.4);
+}
+
+.before\:content-\[\'\'\]::before {
+  background-color: var(--before-bg-color);
 }
 
 
