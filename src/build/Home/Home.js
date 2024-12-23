@@ -21,11 +21,11 @@ const Home = () => {
           <div className="animated-line" />
           <h2 className="sub-heading">
             Computer Engineer Student
-            <br /> 
+            <br />
             <span className="accent-text">@ San Jose State University</span>
           </h2>
-          
-          <div style={{ display: 'flex', gap: '12px'}}>
+
+          <div className="social-links">
             <a
               href="https://www.linkedin.com/in/jovel-ramos/"
               target="_blank"
@@ -45,8 +45,8 @@ const Home = () => {
             </a>
           </div>
         </div>
-        
-        <motion.div 
+
+        <motion.div
           className="portrait-section"
           whileHover="hover"
           variants={imageVariants}
