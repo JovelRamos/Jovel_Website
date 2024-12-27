@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Set initial color scheme to prevent flash */
 :root {
+  color-scheme: light;
   --background-color: #f9f9f9;
   --background-secondary: #ffefef;  
   --background-third: #ebdede;
@@ -21,20 +23,9 @@
   0 8px 7px rgba(0, 0, 0, 0.4);
 }
 
-.before\:content-\[\'\'\]::before {
-  background-color: var(--before-bg-color);
-}
-
-
-body {
-  margin: 0;
-  font-family: Verdana, Arial;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
-}
-
-body.dark-mode {
+/* Dark mode variables */
+:root.dark {
+  color-scheme: dark;
   --background-color: #121212;
   --background-secondary: #2e2e2e; 
   --background-third: #666666;
@@ -51,6 +42,28 @@ body.dark-mode {
   0 8px 4px #777;
 }
 
+/* Set immediate background color based on theme */
+html {
+  background-color: var(--background-color);
+}
+
+html.dark {
+  background-color: var(--background-color);
+}
+
+.before\:content-\[\'\'\]::before {
+  background-color: var(--before-bg-color);
+}
+
+body {
+  margin: 0;
+  font-family: Verdana, Arial;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Rest of your CSS remains the same */
 .nav-menu {
   display: flex;
   justify-content: space-between;
@@ -110,4 +123,3 @@ body.dark-mode {
 .animated-line {
   background-color: var(--accent-color);
 }
-

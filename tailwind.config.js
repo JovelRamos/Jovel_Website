@@ -13,6 +13,12 @@ module.exports = {
           portfolio: '#7757FF',
           contact: '#FF3E0F',
         }
+      },
+      gridTemplateColumns: {
+        'auto-fit-60': 'repeat(auto-fit, minmax(60px, 1fr))',
+      },
+      scale: {
+        '102': '1.02',
       }
     },
   },
