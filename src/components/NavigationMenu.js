@@ -3,7 +3,6 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useTheme } from './ThemeContext';
 import { motion } from 'framer-motion';
 
-// Import all logo images
 import logoHome from '../assets/logo_initials_home.png';
 import logoAbout from '../assets/logo_initials_about.png';
 import logoPortfolio from '../assets/logo_initials_portfolio.png';
@@ -16,16 +15,11 @@ const NavigationMenu = () => {
 
   const getLogo = (path) => {
     switch (path) {
-      case '/':
-        return logoHome;
-      case '/about-me':
-        return logoAbout;
-      case '/portfolio':
-        return logoPortfolio;
-      case '/contact':
-        return logoContact;
-      default:
-        return logoHome;
+      case '/': return logoHome;
+      case '/about-me': return logoAbout;
+      case '/portfolio': return logoPortfolio;
+      case '/contact': return logoContact;
+      default: return logoHome;
     }
   };
 
@@ -46,23 +40,17 @@ const NavigationMenu = () => {
   };
 
   const itemVariants = {
-    initial: {
-      opacity: 0,
-      y: 20
-    },
+    initial: { opacity: 0, y: 20 },
     animate: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.75,
-        ease: "easeOut"
-      }
+      transition: { duration: 0.75, ease: "easeOut" }
     }
   };
 
   return (
-    <div className="sticky top-0 z-50 bg-white transition-colors duration-300 dark:bg-gray-900">
-      <nav className={`flex items-center justify-between px-8 py-4`}>
+    <div className="sticky top-0 z-50 bg-white transition-colors duration-300 dark:bg-[#121212]">
+      <nav className="flex items-center justify-between px-8 py-4">
         <div className="flex items-center">
           <div className="relative w-16 h-16 mr-8">
             <motion.img 
@@ -83,6 +71,7 @@ const NavigationMenu = () => {
               key={location.pathname}
             />
           </div>
+
           <motion.div 
             className="flex gap-8"
             variants={containerVariants}
@@ -102,10 +91,7 @@ const NavigationMenu = () => {
                   className={({ isActive }) => `
                     relative text-lg transition-colors duration-300
                     ${isActive ? 'font-bold' : 'font-normal'}
-                    ${isActive 
-                      ? 'transition-colors duration-300' 
-                      : 'dark:text-white text-gray-800'
-                    }
+                    ${isActive ? '' : 'dark:text-white text-gray-800'}
                     hover:text-current
                     before:content-['']
                     before:absolute
@@ -121,16 +107,10 @@ const NavigationMenu = () => {
                     hover:before:scale-x-100
                     ${isActive ? 'before:scale-x-100' : ''}
                   `}
-                  style={({ isActive }) => 
-                    isActive 
-                      ? { 
-                          color: accentColor,
-                          '--before-bg-color': accentColor,
-                        } 
-                      : {
-                          '--before-bg-color': 'currentColor'
-                        }
-                  }
+                  style={({ isActive }) => ({
+                    color: isActive ? accentColor : undefined,
+                    '--before-bg-color': isActive ? accentColor : 'currentColor'
+                  })}
                 >
                   {link.text}
                 </NavLink>
@@ -138,12 +118,13 @@ const NavigationMenu = () => {
             ))}
           </motion.div>
         </div>
+
         <motion.button 
           className={`
             px-4 py-2 text-base rounded
             border transition-all duration-300
             ${darkMode 
-              ? 'border-white text-white hover:bg-white hover:text-gray-900' 
+              ? 'border-white text-white hover:bg-white hover:text-[#121212]' 
               : 'border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white'
             }
           `}
@@ -156,9 +137,10 @@ const NavigationMenu = () => {
           {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
         </motion.button>
       </nav>
+      
       <motion.div
-                  className="h-1 w-full opacity-80 transition-colors duration-300"
-          style={{ backgroundColor: accentColor }}
+        className="h-1 w-full opacity-80 transition-colors duration-300"
+        style={{ backgroundColor: accentColor }}
         animate={{
           backgroundColor: accentColor,
           transition: { duration: 0.3 }

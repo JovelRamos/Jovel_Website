@@ -1,7 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from '../../components/ThemeContext';
 
 const AnimatedHeading = () => {
+  const { accentColor } = useTheme();
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -36,7 +39,7 @@ const AnimatedHeading = () => {
 
   return (
     <motion.h1
-      className="main-heading"
+      className="text-[6rem] font-bold mb-8 whitespace-nowrap leading-none dark:text-white"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -54,14 +57,15 @@ const AnimatedHeading = () => {
         <motion.span
           key={`name-${index}`}
           variants={letterVariants}
-          className="inline-block accent-text name-letter"
+          className="inline-block"
+          style={{ color: accentColor }}
           animate={{
             textShadow: [
               "none",
-              "var(--text-shadow-bold)"
+              `0 0 40px ${accentColor}80`
             ],
             transition: {
-              delay: 1.5 + (index * 0.1), // Stagger the shadow animation
+              delay: 1.5 + (index * 0.1),
               duration: 0.3
             }
           }}
