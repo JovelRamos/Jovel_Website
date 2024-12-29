@@ -58,19 +58,36 @@ const Home = () => {
         </div>
         
         <motion.div 
-          className="flex-none w-[500px] flex justify-center items-center"
+          className="flex-none w-[500px] flex justify-center items-center relative"
           whileHover="hover"
           variants={imageVariants}
         >
+          {/* Glow effect wrapper */}
+          <motion.div
+            className="absolute inset-0 rounded-lg"
+            initial={{ 
+              boxShadow: `0 0 0px 0px ${accentColor}`,
+              opacity: 0
+            }}
+            animate={{ 
+              boxShadow: `0 0 40px 10px ${accentColor}`,
+              opacity: 0.8
+            }}
+            transition={{ 
+              delay: 1.5, 
+              duration: 1.5, 
+              ease: [0.4, 0, 0.2, 1] // Custom easing for more dramatic effect
+            }}
+          />
+
+          {/* Portrait image */}
           <motion.img
             src={portraitImage}
             alt="Jovel's Portrait"
-            className="w-[500px] h-[500px] object-cover rounded-lg"
-            initial={{ boxShadow: '0 4px 0px rgba(0, 0, 0, 0)' }}
-            animate={{ 
-              boxShadow: `0 4px 40px 5px ${accentColor}`
-            }}
-            transition={{ delay: 1.5, duration: 1.5, ease: "easeOut" }}
+            className="w-[500px] h-[500px] object-cover rounded-lg relative z-10"
+            initial={{ opacity: 0.8 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5, duration: 1.5 }}
           />
         </motion.div>
       </div>

@@ -82,8 +82,22 @@ const AboutMe = () => {
     }
   };
 
-  const cardVariants = {
-    initial: { scale: 1 },
+  // Combined item and card variants
+  const combinedItemCardVariants = {
+    initial: { 
+      opacity: 0, 
+      y: 20, 
+      scale: 1 
+    },
+    animate: { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      transition: { 
+        duration: 0.6, 
+        staggerChildren: 0.6
+      }
+    },
     hover: { 
       scale: 1.02,
       transition: {
@@ -142,7 +156,7 @@ const AboutMe = () => {
     >
       <div className="max-w-7xl mx-auto">
         <motion.h1 
-          className="text-6xl text-center mb-0 text-gray-800 dark:text-white font-verdana font-bold"
+          className="text-6xl text-center mb-12 pt-14 text-gray-800 dark:text-white font-verdana font-bold"
           variants={titleVariants}
           initial="initial"
           animate="animate"
@@ -153,18 +167,38 @@ const AboutMe = () => {
         <div className="flex flex-col md:flex-row gap-16 p-8 max-w-[1400px] mx-auto">
           <div className="flex flex-col gap-16 w-full md:w-auto">
             <motion.div 
-              variants={itemVariants}
+              variants={combinedItemCardVariants}
+              initial="initial"
+              animate="animate"
               whileHover="hover"
-              variants={cardVariants}
-              className="max-w-md mx-auto md:max-w-none"
+              className="max-w-md mx-auto md:max-w-none relative"
             >
-              <img 
+              {/* Glow effect wrapper */}
+              <motion.div
+                className="absolute inset-0 rounded-lg"
+                initial={{ 
+                  boxShadow: `0 0 0px 0px ${accentColor}`,
+                  opacity: 0
+                }}
+                animate={{ 
+                  boxShadow: `0 0 40px 10px ${accentColor}`,
+                  opacity: 0.8
+                }}
+                transition={{ 
+                  delay: 0.8, // Slightly earlier than Home page to match the faster AboutMe animations
+                  duration: 1.5, 
+                  ease: [0.4, 0, 0.2, 1]
+                }}
+              />
+              
+              {/* Portrait image */}
+              <motion.img
                 src={portraitImage} 
                 alt="Jovel's Portrait" 
-                className="rounded-lg shadow-lg w-full h-auto"
-                style={{
-                  boxShadow: `0 4px 40px 5px ${accentColor}`
-                }}
+                className="rounded-lg shadow-lg w-full h-auto relative z-10"
+                initial={{ opacity: 0.8 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8, duration: 1.5 }}
               />
             </motion.div>
             
@@ -174,9 +208,10 @@ const AboutMe = () => {
                 border: `1px solid ${accentColor}`,
                 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
               }}
-              variants={itemVariants}
+              variants={combinedItemCardVariants}
+              initial="initial"
+              animate="animate"
               whileHover="hover"
-              variants={cardVariants}
             >
               <h2 className="text-3xl mb-4 font-verdana font-bold" style={{ color: accentColor }}>Skills</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-auto-fit-60 gap-4 mt-4">
@@ -196,9 +231,10 @@ const AboutMe = () => {
                   border: `1px solid ${accentColor}`,
                   boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                 }}
-                variants={itemVariants}
+                variants={combinedItemCardVariants}
+                initial="initial"
+                animate="animate"
                 whileHover="hover"
-                variants={cardVariants}
               >
                 <h2 className="text-3xl mb-4 font-verdana font-bold" style={{ color: accentColor }}>{title}</h2>
                 <p className="text-gray-800 dark:text-gray-200 font-verdana">{content[title]}</p>
