@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Portfolio = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [isTitleHovered, setIsTitleHovered] = useState(false);
   const navigate = useNavigate();
 
   const sections = [
@@ -91,11 +92,69 @@ const Portfolio = () => {
     }
   ];
 
+  // Title animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const letterVariants = {
+    hidden: {
+      y: -50,
+      opacity: 0,
+      scale: 0.5
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 200
+      }
+    }
+  };
+
+  // Gradient and shadow styles for title
+  const gradientStyle = {
+    background: 'linear-gradient(-45deg, #007CF0 0%, #00DFD8 50%, #7DE7EB 100%)',
+    backgroundSize: '200% 200%',
+    WebkitBackgroundClip: 'text',
+    backgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    animation: 'blueGradient 3s ease infinite'
+  };
+
+  const shadowStyle = {
+    filter: 'drop-shadow(0px 0px 3px rgba(255,255,255,0.3))',
+    textShadow: isTitleHovered 
+      ? `
+        2px 2px 1px rgba(255,255,255,0.15),
+        4px 4px 2px rgba(200,235,255,0.15),
+        6px 6px 3px rgba(150,215,255,0.15),
+        8px 8px 4px rgba(100,195,255,0.15),
+        10px 10px 5px rgba(50,175,255,0.15),
+        12px 12px 25px rgba(0,155,255,0.25)
+      `
+      : `
+        1px 1px 1px rgba(255,255,255,0.15),
+        2px 2px 2px rgba(200,235,255,0.15),
+        3px 3px 3px rgba(150,215,255,0.15),
+        4px 4px 4px rgba(100,195,255,0.15),
+        6px 6px 15px rgba(50,175,255,0.2)
+      `
+  };
+
   const handleClick = (path) => {
     navigate(path);
   };
-
-  
 
   return (
     <div style={{ 
@@ -103,15 +162,41 @@ const Portfolio = () => {
       padding: '2rem',
       backgroundColor: 'var(--background-color)'
     }}>
-      <motion.h1 
-        className="main-heading"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+      {/* Animated Title */}
+      <motion.h1
+        className="text-7xl lg:text-8xl xl:text-8xl text-center mb-12 pt-14 font-verdana font-bold dark:text-white"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
       >
-        My <span className="accent-text">Projects</span>
+        {"My ".split('').map((char, index) => (
+          <motion.span
+            key={index}
+            variants={letterVariants}
+            className="inline-block"
+          >
+            {char}
+          </motion.span>
+        ))}
+        <motion.span
+          className="inline-block"
+          onMouseEnter={() => setIsTitleHovered(true)}
+          onMouseLeave={() => setIsTitleHovered(false)}
+          animate={{
+            scale: isTitleHovered ? 1.05 : 1,
+            y: isTitleHovered ? -5 : 0,
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 400,
+            damping: 25
+          }}
+          style={{ ...gradientStyle, ...shadowStyle }}
+        >
+          Projects
+        </motion.span>
       </motion.h1>
-      
+
       <div className="animated-line" />
 
       <div style={{
@@ -184,7 +269,7 @@ const Portfolio = () => {
                         transition={{ duration: 0.3 }}
                       >
                         <h2 style={{ 
-                          fontSize: '3.5rem',  // Increased from 3rem
+                          fontSize: '3.5rem',
                           marginBottom: '1rem'
                         }}>
                           {section.shortTitle}
@@ -199,7 +284,7 @@ const Portfolio = () => {
                               marginBottom: '0.5rem'
                             }}>
                               <h3 style={{ 
-                                fontSize: '1.8rem',  // Increased from 1.3rem
+                                fontSize: '1.8rem',
                                 color: '#ffffff',
                                 margin: 0
                               }}>
@@ -223,14 +308,14 @@ const Portfolio = () => {
                               )}
                             </div>
                             <p style={{ 
-                              fontSize: '1.4rem',  // Increased from 1rem
+                              fontSize: '1.4rem',
                               marginBottom: '0.5rem',
                               color: 'rgba(255, 255, 255, 0.9)'
                             }}>
                               {project.description}
                             </p>
                             <p style={{ 
-                              fontSize: '1.2rem',  // Increased from 0.9rem
+                              fontSize: '1.2rem',
                               marginBottom: '0.8rem',
                               color: 'rgba(255, 255, 255, 0.7)'
                             }}>
@@ -245,7 +330,7 @@ const Portfolio = () => {
                                 <li 
                                   key={detailIdx}
                                   style={{ 
-                                    fontSize: '1.1rem',  // Increased from 0.9rem
+                                    fontSize: '1.1rem',
                                     marginBottom: '0.3rem',
                                     color: 'rgba(255, 255, 255, 0.8)',
                                     display: 'flex',
@@ -308,6 +393,28 @@ const Portfolio = () => {
           </div>
         ))}
       </div>
+
+      <style>
+        {`
+          @keyframes blueGradient {
+            0% {
+              background-position: 0% 50%;
+            }
+            25% {
+              background-position: 100% 50%;
+            }
+            50% {
+              background-position: 100% 50%;
+            }
+            75% {
+              background-position: 0% 50%;
+            }
+            100% {
+              background-position: 0% 50%;
+            }
+          }
+        `}
+      </style>
     </div>
   );
 };
