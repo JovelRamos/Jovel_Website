@@ -209,21 +209,26 @@ const AboutMe = () => {
             </motion.span>
           ))}
           <motion.span
+            variants={letterVariants}
             className="inline-block"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            animate={{
-              scale: isHovered ? 1.05 : 1,
-              y: isHovered ? -5 : 0,
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 400,
-              damping: 25
-            }}
-            style={{ ...gradientStyle, ...shadowStyle }}
           >
-            ME
+            <motion.span
+              className="inline-block"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              animate={{
+                scale: isHovered ? 1.05 : 1,
+                y: isHovered ? -5 : 0,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 25
+              }}
+              style={{ ...gradientStyle, ...shadowStyle }}
+            >
+              ME
+            </motion.span>
           </motion.span>
           {".md".split('').map((char, index) => (
             <motion.span
