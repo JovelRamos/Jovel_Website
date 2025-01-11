@@ -178,23 +178,32 @@ const Portfolio = () => {
             {char}
           </motion.span>
         ))}
-        <motion.span
-          className="inline-block"
-          onMouseEnter={() => setIsTitleHovered(true)}
-          onMouseLeave={() => setIsTitleHovered(false)}
-          animate={{
-            scale: isTitleHovered ? 1.05 : 1,
-            y: isTitleHovered ? -5 : 0,
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 400,
-            damping: 25
-          }}
-          style={{ ...gradientStyle, ...shadowStyle }}
-        >
-          Projects
-        </motion.span>
+        {/* Animated "Projects" text */}
+        {"Projects".split('').map((char, index) => (
+          <motion.span
+            key={`projects-${index}`}
+            variants={letterVariants}
+            className="inline-block"
+            onMouseEnter={() => setIsTitleHovered(true)}
+            onMouseLeave={() => setIsTitleHovered(false)}
+            style={{ 
+              ...gradientStyle, 
+              ...shadowStyle,
+              display: 'inline-block'
+            }}
+            whileHover={{
+              scale: 1.05,
+              y: -5,
+              transition: {
+                type: "spring",
+                stiffness: 400,
+                damping: 25
+              }
+            }}
+          >
+            {char}
+          </motion.span>
+        ))}
       </motion.h1>
 
       <div className="animated-line" />
